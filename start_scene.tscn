@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8wsr22bn26kg"]
+
+[ext_resource type="Script" path="res://start_scene.gd" id="1_umdpx"]
+[ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://jet.tscn" id="2_syek2"]
+[ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://particle_static.tscn" id="3_5bj4k"]
+
+[node name="start_scene" type="Node2D"]
+script = ExtResource("1_umdpx")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 525.0
+offset_top = 319.0
+offset_right = 702.0
+offset_bottom = 353.0
+text = "start game"
+
+[node name="Jetparticles" parent="." instance=ExtResource("2_syek2")]
+position = Vector2(-121, 57)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 331.0
+offset_top = 119.0
+offset_right = 893.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 45
+text = "game name"
+horizontal_alignment = 1
+
+[node name="Node2D" parent="." instance=ExtResource("3_5bj4k")]
+position = Vector2(-127, -44)
+
+[node name="Node2D2" parent="." instance=ExtResource("3_5bj4k")]
+position = Vector2(-144, 291)
+
+[node name="Node2D3" parent="." instance=ExtResource("3_5bj4k")]
+position = Vector2(-150, 391)
+
+[connection signal="button_down" from="Button" to="." method="start_game"]

@@ -8,7 +8,7 @@ func _ready():
 
 
 func particles_create():
-	$CPUParticles2D.restart()
+	$particles.restart()
 	var new_object = particles.instantiate()
 	new_object.position = position
 	get_tree().root.add_child(new_object)

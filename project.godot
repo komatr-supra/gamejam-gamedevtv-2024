@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="gamejam"
-run/main_scene="res://game_scene.tscn"
+run/main_scene="res://start_scene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="gamejam"
 
 [input]
 

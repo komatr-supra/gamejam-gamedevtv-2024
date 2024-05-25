@@ -19,7 +19,6 @@ scale_max = 10.0
 script = ExtResource("1_vaan8")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_4ooxi")
 lifetime = 0.2

@@ -27,7 +27,11 @@ func _integrate_forces(state):
 		apply_central_impulse(thrust * state.step)
 		power = power - thrust_cost		
 		$"../TextureProgressBar".value = power
-		thrust_enabled = true
+		if(power <= 0):
+			queue_free()
+			thrust_enabled = false
+		else:
+			thrust_enabled = true
 	get_node("jet").thrust(thrust_enabled)
 
 
