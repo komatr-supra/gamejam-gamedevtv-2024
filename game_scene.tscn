@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://cehk7cuewxedv"]
+
+[ext_resource type="PackedScene" uid="uid://ysyoal0b4rtc" path="res://player.tscn" id="1_2pttd"]
+[ext_resource type="Script" path="res://main.gd" id="1_rbnqd"]
+[ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://falling_object.tscn" id="2_kgkuk"]
+[ext_resource type="Texture2D" uid="uid://g84n5piieuvi" path="res://icon.svg" id="4_mmn8h"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_rbnqd")
+falling_object_scene = ExtResource("2_kgkuk")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_2pttd")]
+position = Vector2(520, 91)
+mass = 0.2
+gravity_scale = 0.15
+rotation_speed = 1000
+thrust_power = 200
+max_linear_speed = 150
+max_rotation_angle = 0.8
+
+[node name="Timer" type="Timer" parent="CharacterBody2D"]
+wait_time = 0.165
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 226.0
+offset_top = 35.0
+offset_right = 808.0
+offset_bottom = 71.0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("4_mmn8h")
+
+[node name="LabelPower" type="Label" parent="."]
+offset_left = 421.0
+offset_top = 2.0
+offset_right = 612.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 24
+text = "POWER"
+horizontal_alignment = 1
+
+[node name="LabelTime" type="Label" parent="."]
+offset_left = 988.0
+offset_top = 4.0
+offset_right = 1144.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 21
+text = "time survived"
+horizontal_alignment = 1
+
+[node name="timer" type="Label" parent="."]
+offset_left = 1010.0
+offset_top = 32.0
+offset_right = 1127.0
+offset_bottom = 66.0
