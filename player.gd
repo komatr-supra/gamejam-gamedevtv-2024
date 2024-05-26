@@ -9,6 +9,9 @@ extends RigidBody2D
 @export var thrust_cost: float = 0.1
 @export var collision_cost: int = 15
 @export var death_particles: PackedScene
+
+signal player_data_signal(velocity: Vector2, position: Vector2)
+
 func _ready():
 	$"../TextureProgressBar".value = power
 
@@ -40,6 +43,9 @@ func _integrate_forces(state):
 		else:
 			thrust_enabled = true
 	get_node("jet").thrust(thrust_enabled)
+
+	player_data_signal.emit(linear_velocity, global_position)
+
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
