@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8wsr22bn26kg"]
+[gd_scene load_steps=6 format=3 uid="uid://c8wsr22bn26kg"]
 
 [ext_resource type="Script" path="res://scenes/start scene/start_scene.gd" id="1_umdpx"]
 [ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://scenes/player scene/jet.tscn" id="2_syek2"]
 [ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://scenes/particles scene/particle_static.tscn" id="3_5bj4k"]
+[ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="4_jn5hr"]
+[ext_resource type="PackedScene" uid="uid://ch1oibgwte7h6" path="res://scenes/falling objects/particles_falling_objects.tscn" id="5_ofcpa"]
 
 [node name="start_scene" type="Node2D"]
 script = ExtResource("1_umdpx")
@@ -29,7 +31,15 @@ horizontal_alignment = 1
 [node name="Node2D" parent="." instance=ExtResource("3_5bj4k")]
 position = Vector2(-127, -44)
 
+[node name="RigidBody2D" parent="." instance=ExtResource("4_jn5hr")]
+position = Vector2(-174, 137)
+
+[node name="particles" parent="." instance=ExtResource("5_ofcpa")]
+position = Vector2(-186, 66)
+
 [connection signal="ready" from="." to="Node2D" method="_on_timer_timeout"]
+[connection signal="ready" from="." to="RigidBody2D" method="particles_create"]
+[connection signal="ready" from="." to="particles" method="restart"]
 [connection signal="tree_entered" from="." to="Jetparticles" method="load_particles"]
 [connection signal="tree_exited" from="." to="Jetparticles" method="stop_particles"]
 [connection signal="button_down" from="Button" to="." method="start_game"]

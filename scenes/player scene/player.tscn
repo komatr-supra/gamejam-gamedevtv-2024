@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/player scene/player.gd" id="1_qsc0a"]
 [ext_resource type="Texture2D" uid="uid://budpo2vbyh3ov" path="res://sprites/meteorites/spaceRockets_004.png" id="2_h1og3"]
 [ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://scenes/player scene/jet.tscn" id="3_lwxni"]
+[ext_resource type="PackedScene" uid="uid://dt1sdu6wd8ar3" path="res://scenes/player scene/ship_exposion_particles.tscn" id="5_2ndox"]
 [ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://scenes/particles scene/particle_static.tscn" id="5_ubi0u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d48hs"]
@@ -12,18 +13,6 @@ height = 157.5
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v5j6w"]
 radius = 17.0
 height = 168.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kwfin"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(15, 100, 1)
-spread = 180.0
-initial_velocity_min = 200.0
-initial_velocity_max = 200.0
-gravity = Vector3(0, 0, 0)
-linear_accel_min = -2.29
-scale_min = 5.0
-scale_max = 15.0
 
 [node name="CharacterBody2D" type="RigidBody2D" groups=["player"]]
 collision_mask = 2
@@ -56,12 +45,6 @@ shape = SubResource("CapsuleShape2D_v5j6w")
 [node name="jet" parent="." instance=ExtResource("3_lwxni")]
 position = Vector2(1, 24)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(2, -63)
-emitting = false
-amount = 50
-process_material = SubResource("ParticleProcessMaterial_kwfin")
-lifetime = 0.2
-one_shot = true
+[node name="GPUParticles2D" parent="." instance=ExtResource("5_2ndox")]
 
 [connection signal="body_entered" from="PlayerArea" to="." method="_on_area_2d_body_entered"]

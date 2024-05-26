@@ -19,9 +19,9 @@ func _process(delta):
 
 func particles_create():
 	$particles.restart()
-	var new_object = particles.instantiate()
-	new_object.position = position
-	get_tree().root.add_child(new_object)
+	#var new_object = particles.instantiate()
+	#new_object.position = position
+	#add_child(new_object)
 
 func destroy():
 	queue_free()
