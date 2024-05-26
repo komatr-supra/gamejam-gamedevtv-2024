@@ -28,4 +28,4 @@ func _process(delta):
 		if fall_delay > 0.1:
 			fall_delay -= 0.00001
 		SystemData.time += delta
-		$timer.text = str(SystemData.time)
+		$timer.text = str(int(SystemData.time))

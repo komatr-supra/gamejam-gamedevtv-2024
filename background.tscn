@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdcsnat8226eu"]
+
+[ext_resource type="Script" path="res://background.gd" id="1_sgyub"]
+[ext_resource type="Script" path="res://bg_texture.gd" id="2_4yt02"]
+
+[sub_resource type="Gradient" id="Gradient_jwyjb"]
+colors = PackedColorArray(0, 0.00784314, 0.152941, 1, 0.101961, 0.270588, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xydk4"]
+noise_type = 2
+frequency = 0.0029
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kq4pg"]
+width = 1152
+height = 648
+seamless = true
+color_ramp = SubResource("Gradient_jwyjb")
+noise = SubResource("FastNoiseLite_xydk4")
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource("1_sgyub")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(0, 648)
+
+[node name="BGTexture" type="TextureRect" parent="ParallaxLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("NoiseTexture2D_kq4pg")
+script = ExtResource("2_4yt02")
