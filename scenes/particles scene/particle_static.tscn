@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://6xfubrtyfw2b"]
 
-[ext_resource type="Script" path="res://particles.gd" id="1_umh3r"]
+[ext_resource type="Script" path="res://scenes/particles scene/particles.gd" id="1_umh3r"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lc4w0"]
 lifetime_randomness = 0.14

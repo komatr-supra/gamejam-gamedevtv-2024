@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7yfi0i55ws8j"
-path="res://.godot/imported/spaceRockets_001.png-e4bd2c6093dd5d7c7fe53e27813cbd9d.ctex"
+uid="uid://kwlypubouuam"
+path="res://.godot/imported/buttonYellow.png-da346f90fea97fbef67097ceddf74b95.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://spaceRockets_001.png"
-dest_files=["res://.godot/imported/spaceRockets_001.png-e4bd2c6093dd5d7c7fe53e27813cbd9d.ctex"]
+source_file="res://sprites/buttonYellow.png"
+dest_files=["res://.godot/imported/buttonYellow.png-da346f90fea97fbef67097ceddf74b95.ctex"]
 
 [params]
 

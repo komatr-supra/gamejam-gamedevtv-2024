@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://ysyoal0b4rtc"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_qsc0a"]
+[ext_resource type="Script" path="res://scenes/player scene/player.gd" id="1_qsc0a"]
 [ext_resource type="Texture2D" uid="uid://budpo2vbyh3ov" path="res://sprites/meteorites/spaceRockets_004.png" id="2_h1og3"]
-[ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://jet.tscn" id="3_lwxni"]
-[ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://particle_static.tscn" id="5_ubi0u"]
+[ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://scenes/player scene/jet.tscn" id="3_lwxni"]
+[ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://scenes/particles scene/particle_static.tscn" id="5_ubi0u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d48hs"]
 radius = 16.0

@@ -5,9 +5,6 @@ extends Node2D
 var timer
 var is_player_alive = true
 func _ready():
-	preload("res://jet.gd")
-	preload("res://particle_static.tscn")
-	preload("res://falling_object.tscn")
 	timer = $Timer	
 	timer.connect("timeout", _on_FallingObjectTimer_timeout)
 	timer.start()

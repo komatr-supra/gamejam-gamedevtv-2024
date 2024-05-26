@@ -1,20 +1,20 @@
 [gd_scene load_steps=9 format=3 uid="uid://cehk7cuewxedv"]
 
-[ext_resource type="PackedScene" uid="uid://ysyoal0b4rtc" path="res://player.tscn" id="1_2pttd"]
-[ext_resource type="Script" path="res://main.gd" id="1_rbnqd"]
-[ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://falling_object.tscn" id="2_kgkuk"]
-[ext_resource type="Texture2D" uid="uid://kwlypubouuam" path="res://buttonYellow.png" id="4_jdvxb"]
-[ext_resource type="Texture2D" uid="uid://dna5vuhii32fj" path="res://bar_filler.png" id="5_qmidx"]
-[ext_resource type="PackedScene" uid="uid://cu2fky2uwpfjd" path="res://end_scene.tscn" id="6_ll0ow"]
-[ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://jet.tscn" id="7_egnn7"]
-[ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://background.tscn" id="8_nngrn"]
+[ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
+[ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="2_ttlgl"]
+[ext_resource type="PackedScene" uid="uid://ysyoal0b4rtc" path="res://scenes/player scene/player.tscn" id="3_wbngf"]
+[ext_resource type="Texture2D" uid="uid://kwlypubouuam" path="res://sprites/buttonYellow.png" id="4_ked5i"]
+[ext_resource type="Texture2D" uid="uid://dna5vuhii32fj" path="res://sprites/bar_filler.png" id="5_n7gac"]
+[ext_resource type="PackedScene" uid="uid://cu2fky2uwpfjd" path="res://scenes/end scene/end_scene.tscn" id="6_itygd"]
+[ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://scenes/player scene/jet.tscn" id="7_70bwd"]
+[ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="8_s83b5"]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_rbnqd")
-falling_object_scene = ExtResource("2_kgkuk")
+script = ExtResource("1_3072i")
+falling_object_scene = ExtResource("2_ttlgl")
 fall_delay = 0.35
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_2pttd")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_wbngf")]
 position = Vector2(522, 224)
 mass = 0.2
 gravity_scale = 0.15
@@ -33,8 +33,8 @@ stretch_margin_left = 6
 stretch_margin_top = 6
 stretch_margin_right = 6
 stretch_margin_bottom = 6
-texture_under = ExtResource("4_jdvxb")
-texture_progress = ExtResource("5_qmidx")
+texture_under = ExtResource("4_ked5i")
+texture_progress = ExtResource("5_n7gac")
 
 [node name="LabelPower" type="Label" parent="."]
 offset_left = 421.0
@@ -68,7 +68,7 @@ position = Vector2(576, 325)
 wait_time = 3.0
 autostart = true
 
-[node name="EndScene" parent="." instance=ExtResource("6_ll0ow")]
+[node name="EndScene" parent="." instance=ExtResource("6_itygd")]
 z_index = 2
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -77,10 +77,10 @@ monitorable = false
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-147, -203, 1377, -187, 1415, 932, -297, 974, -259, -114, -174, -129, -133, -64, -133, -64, -153, 862, 1329, 854, 1308, -128, -143, -111)
 
-[node name="Jetparticles" parent="." instance=ExtResource("7_egnn7")]
+[node name="Jetparticles" parent="." instance=ExtResource("7_70bwd")]
 position = Vector2(-438, 101)
 
-[node name="ParallaxBackground" parent="." instance=ExtResource("8_nngrn")]
+[node name="ParallaxBackground" parent="." instance=ExtResource("8_s83b5")]
 
 [connection signal="player_data_signal" from="CharacterBody2D" to="ParallaxBackground" method="_on_character_body_2d_player_data_signal"]
 [connection signal="tree_exiting" from="CharacterBody2D" to="." method="player_died"]
