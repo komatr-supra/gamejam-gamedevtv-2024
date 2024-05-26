@@ -35,4 +35,8 @@ position = Vector2(-144, 291)
 [node name="Node2D3" parent="." instance=ExtResource("3_5bj4k")]
 position = Vector2(-150, 391)
 
+[node name="Node2D4" parent="." instance=ExtResource("3_5bj4k")]
+position = Vector2(-228, -76)
+
+[connection signal="ready" from="." to="Node2D" method="_on_timer_timeout"]
 [connection signal="button_down" from="Button" to="." method="start_game"]

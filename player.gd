@@ -8,7 +8,7 @@ extends RigidBody2D
 @export var power: float = 100
 @export var thrust_cost: float = 0.1
 @export var collision_cost: int = 15
-
+@export var death_particles: PackedScene
 func _ready():
 	$"../TextureProgressBar".value = power
 
@@ -35,17 +35,26 @@ func _integrate_forces(state):
 		power -= thrust_cost
 		$"../TextureProgressBar".value = power
 		if power <= 0:
-			queue_free()
+			player_die()
 			thrust_enabled = false
 		else:
 			thrust_enabled = true
 	get_node("jet").thrust(thrust_enabled)
 
 func _on_body_entered(body):
-	print("collision")
+	if body.is_in_group("player"):
+		player_die()
 
 func _on_area_2d_body_entered(body):    
 	power -= collision_cost
 	$"../TextureProgressBar".value = power
 	if power <= 0:
-		queue_free()
+		player_die()
+
+func player_die():
+	var particles = $GPUParticles2D
+	particles.emitting = true;
+	remove_child(particles);
+	particles.position = position
+	get_parent().add_child(particles)
+	queue_free()
