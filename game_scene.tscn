@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=9 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="PackedScene" uid="uid://ysyoal0b4rtc" path="res://player.tscn" id="1_2pttd"]
 [ext_resource type="Script" path="res://main.gd" id="1_rbnqd"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dna5vuhii32fj" path="res://bar_filler.png" id="5_qmidx"]
 [ext_resource type="PackedScene" uid="uid://cu2fky2uwpfjd" path="res://end_scene.tscn" id="6_ll0ow"]
 [ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://jet.tscn" id="7_egnn7"]
+[ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://background.tscn" id="8_nngrn"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_rbnqd")
@@ -78,6 +79,9 @@ polygon = PackedVector2Array(-147, -203, 1377, -187, 1415, 932, -297, 974, -259,
 [node name="Jetparticles" parent="." instance=ExtResource("7_egnn7")]
 position = Vector2(-438, 101)
 
+[node name="ParallaxBackground" parent="." instance=ExtResource("8_nngrn")]
+
+[connection signal="player_data_signal" from="CharacterBody2D" to="ParallaxBackground" method="_on_character_body_2d_player_data_signal"]
 [connection signal="tree_exiting" from="CharacterBody2D" to="." method="player_died"]
 [connection signal="tree_exiting" from="CharacterBody2D" to="EndScene" method="game_over"]
 [connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="_on_body_entered"]
