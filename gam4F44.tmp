@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=8 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="PackedScene" uid="uid://ysyoal0b4rtc" path="res://player.tscn" id="1_2pttd"]
 [ext_resource type="Script" path="res://main.gd" id="1_rbnqd"]
 [ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://falling_object.tscn" id="2_kgkuk"]
 [ext_resource type="Texture2D" uid="uid://kwlypubouuam" path="res://buttonYellow.png" id="4_jdvxb"]
 [ext_resource type="Texture2D" uid="uid://dna5vuhii32fj" path="res://bar_filler.png" id="5_qmidx"]
+[ext_resource type="Script" path="res://Parallax.gd" id="6_88ahd"]
+[ext_resource type="Texture2D" uid="uid://chxkdwo2gntp6" path="res://darkPurple.png" id="6_xwrqx"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_rbnqd")
@@ -70,3 +72,13 @@ position = Vector2(765, 350)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.165
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("6_88ahd")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(578, 326)
+scale = Vector2(4.64063, 2.69531)
+texture = ExtResource("6_xwrqx")

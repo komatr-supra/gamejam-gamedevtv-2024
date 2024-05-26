@@ -1,14 +1,15 @@
 extends Node2D
 
 @export var falling_object_scene : PackedScene
+@export var fall_delay = 0.5
 var timer
 var time_survived = 0.0
 func _ready():
 	preload("res://jet.gd")
 	preload("res://particle_static.tscn")
 	preload("res://falling_object.tscn")
-	timer = $CharacterBody2D/Timer
-	timer.wait_time = 1.0 # spawn interval
+	timer = $Timer
+	timer.wait_time = fall_delay
 	timer.connect("timeout", _on_FallingObjectTimer_timeout)
 	timer.start()
 
