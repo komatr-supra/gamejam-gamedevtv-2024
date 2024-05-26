@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://bvsi36s7ngmh7"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX/Enemy/Hit"
+guid = "{9ded9db6-7aac-49f7-b85b-8126a1e14c9e}"
+name = "Hit"

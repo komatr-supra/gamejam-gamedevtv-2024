@@ -1,0 +1,18 @@
+[gd_resource type="ParameterAsset" load_steps=3 format=3 uid="uid://cmaeryjyps5x3"]
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_wq5d5"]
+data1 = 749206211
+data2 = 2031567672
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_fdeuf"]
+name = "Player_Health"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_wq5d5")
+maximum = 100.0
+flags = 4
+guid = "{b727159f-e0f4-41e1-9b83-2d8b856a0a64}"
+
+[resource]
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_fdeuf")
+path = "parameter:/Player_Health"
+guid = "{b727159f-e0f4-41e1-9b83-2d8b856a0a64}"
+name = "Player_Health"
