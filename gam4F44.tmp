@@ -5,16 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://falling_object.tscn" id="2_kgkuk"]
 [ext_resource type="Texture2D" uid="uid://kwlypubouuam" path="res://buttonYellow.png" id="4_jdvxb"]
 [ext_resource type="Texture2D" uid="uid://dna5vuhii32fj" path="res://bar_filler.png" id="5_qmidx"]
-[ext_resource type="PackedScene" uid="uid://cu2fky2uwpfjd" path="res://end_scene.tscn" id="6_ll0ow"]
-[ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://jet.tscn" id="7_egnn7"]
+[ext_resource type="Script" path="res://Parallax.gd" id="6_88ahd"]
+[ext_resource type="Texture2D" uid="uid://chxkdwo2gntp6" path="res://darkPurple.png" id="6_xwrqx"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_rbnqd")
 falling_object_scene = ExtResource("2_kgkuk")
-fall_delay = 0.35
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_2pttd")]
-position = Vector2(522, 224)
+position = Vector2(520, 91)
 mass = 0.2
 gravity_scale = 0.15
 rotation_speed = 1000
@@ -62,22 +61,24 @@ offset_bottom = 66.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 325)
 
+[node name="RigidBody2D" parent="." instance=ExtResource("2_kgkuk")]
+position = Vector2(270, 329)
+
+[node name="RigidBody2D2" parent="." instance=ExtResource("2_kgkuk")]
+position = Vector2(532, 298)
+
+[node name="RigidBody2D3" parent="." instance=ExtResource("2_kgkuk")]
+position = Vector2(765, 350)
+
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
+wait_time = 0.165
 
-[node name="EndScene" parent="." instance=ExtResource("6_ll0ow")]
-z_index = 2
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("6_88ahd")
 
-[node name="Area2D" type="Area2D" parent="."]
-monitorable = false
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-147, -203, 1377, -187, 1415, 932, -297, 974, -259, -114, -174, -129, -133, -64, -133, -64, -153, 862, 1329, 854, 1308, -128, -143, -111)
-
-[node name="Jetparticles" parent="." instance=ExtResource("7_egnn7")]
-position = Vector2(-438, 101)
-
-[connection signal="tree_exiting" from="CharacterBody2D" to="." method="player_died"]
-[connection signal="tree_exiting" from="CharacterBody2D" to="EndScene" method="game_over"]
-[connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="_on_body_entered"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(578, 326)
+scale = Vector2(4.64063, 2.69531)
+texture = ExtResource("6_xwrqx")

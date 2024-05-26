@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgfln8h2uvikk"]
+[gd_scene load_steps=10 format=3 uid="uid://bgfln8h2uvikk"]
 
-[ext_resource type="Texture2D" uid="uid://g84n5piieuvi" path="res://icon.svg" id="1_jpr0u"]
 [ext_resource type="Script" path="res://falling_object.gd" id="1_ow8yu"]
 [ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://particle_static.tscn" id="2_rx0jv"]
+[ext_resource type="Texture2D" uid="uid://b72x5ymb67frk" path="res://sprites/meteorites/spaceMeteors_001.png" id="3_xcoxy"]
+[ext_resource type="Texture2D" uid="uid://injacililmdw" path="res://sprites/meteorites/spaceMeteors_002.png" id="4_4jnmq"]
+[ext_resource type="Texture2D" uid="uid://by8ve8gig6ohs" path="res://sprites/meteorites/spaceMeteors_003.png" id="5_dmxlg"]
+[ext_resource type="Texture2D" uid="uid://d2ehsbe814fcm" path="res://sprites/meteorites/spaceMeteors_004.png" id="6_311mj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5y48"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_dhygs"]
+radius = 16.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_owq31"]
 lifetime_randomness = 0.5
@@ -21,22 +25,28 @@ gravity = Vector3(0, 0, 0)
 scale_min = 1.25
 scale_max = 4.75
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_eh25d"]
+radius = 17.0
+
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 3
+collision_mask = 3
 mass = 0.01
 gravity_scale = 0.0
 script = ExtResource("1_ow8yu")
 particles = ExtResource("2_rx0jv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_j5y48")
+meteorites = Array[Texture2D]([ExtResource("3_xcoxy"), ExtResource("4_4jnmq"), ExtResource("5_dmxlg"), ExtResource("6_311mj")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.19209e-07, -1.01328e-06)
 scale = Vector2(0.15625, 0.171875)
-texture = ExtResource("1_jpr0u")
+texture = ExtResource("3_xcoxy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dhygs")
 
 [node name="particles" type="GPUParticles2D" parent="."]
+position = Vector2(-2, 2)
 emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_owq31")
@@ -47,5 +57,13 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_eh25d")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="destroy"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_body_entered"]
