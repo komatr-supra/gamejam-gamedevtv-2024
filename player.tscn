@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://ysyoal0b4rtc"]
+[gd_scene load_steps=12 format=3 uid="uid://ysyoal0b4rtc"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_qsc0a"]
 [ext_resource type="Texture2D" uid="uid://budpo2vbyh3ov" path="res://sprites/meteorites/spaceRockets_004.png" id="2_h1og3"]
 [ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://jet.tscn" id="3_lwxni"]
+[ext_resource type="Texture2D" uid="uid://kwlypubouuam" path="res://buttonYellow.png" id="5_kjsgg"]
 [ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://particle_static.tscn" id="5_ubi0u"]
+[ext_resource type="Texture2D" uid="uid://1drqvefrm5fv" path="res://buttonYellowTransparent.png" id="6_tnx3k"]
+[ext_resource type="Texture2D" uid="uid://rp8q71ealoui" path="res://whiteBar.png" id="7_8odpn"]
+[ext_resource type="Script" path="res://power_bar.gd" id="8_kew3p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d48hs"]
 radius = 16.0
@@ -63,5 +67,23 @@ amount = 50
 process_material = SubResource("ParticleProcessMaterial_kwfin")
 lifetime = 0.2
 one_shot = true
+
+[node name="PowerBar" type="TextureProgressBar" parent="."]
+offset_left = -7.0
+offset_top = -88.0
+offset_right = 7.0
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+stretch_margin_left = 6
+stretch_margin_top = 6
+stretch_margin_right = 6
+stretch_margin_bottom = 6
+texture_under = ExtResource("5_kjsgg")
+texture_over = ExtResource("6_tnx3k")
+texture_progress = ExtResource("7_8odpn")
+tint_under = Color(0.329412, 0.580392, 0.784314, 1)
+tint_progress = Color(0.709804, 0.945098, 0.45098, 1)
+script = ExtResource("8_kew3p")
 
 [connection signal="body_entered" from="PlayerArea" to="." method="_on_area_2d_body_entered"]

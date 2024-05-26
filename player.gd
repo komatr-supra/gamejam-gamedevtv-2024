@@ -10,10 +10,13 @@ extends RigidBody2D
 @export var collision_cost: int = 15
 @export var death_particles: PackedScene
 
+@onready var power_bar : TextureProgressBar = $PowerBar
+
 signal player_data_signal(velocity: Vector2, position: Vector2)
 
 func _ready():
 	$"../TextureProgressBar".value = power
+	power_bar.value = power
 
 func _integrate_forces(state):
 	var thrust_enabled = false
@@ -37,6 +40,7 @@ func _integrate_forces(state):
 		apply_central_impulse(thrust * state.step)
 		power -= thrust_cost
 		$"../TextureProgressBar".value = power
+		power_bar.value = power
 		if power <= 0:
 			player_die()
 			thrust_enabled = false
@@ -54,6 +58,7 @@ func _on_body_entered(body):
 func _on_area_2d_body_entered(body):    
 	power -= collision_cost
 	$"../TextureProgressBar".value = power
+	power_bar.value = power
 	if power <= 0:
 		player_die()
 
