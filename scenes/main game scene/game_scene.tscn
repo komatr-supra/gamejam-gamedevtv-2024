@@ -1,12 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=6 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="2_ttlgl"]
-[ext_resource type="PackedScene" uid="uid://ysyoal0b4rtc" path="res://scenes/player scene/player.tscn" id="3_wbngf"]
-[ext_resource type="Texture2D" uid="uid://kwlypubouuam" path="res://sprites/buttonYellow.png" id="4_ked5i"]
-[ext_resource type="Texture2D" uid="uid://dna5vuhii32fj" path="res://sprites/bar_filler.png" id="5_n7gac"]
+[ext_resource type="PackedScene" uid="uid://ysyoal0b4rtc" path="res://player.tscn" id="3_wbngf"]
 [ext_resource type="PackedScene" uid="uid://cu2fky2uwpfjd" path="res://scenes/end scene/end_scene.tscn" id="6_itygd"]
-[ext_resource type="PackedScene" uid="uid://b3vj5o1cgi62w" path="res://scenes/player scene/jet.tscn" id="7_70bwd"]
 [ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="8_s83b5"]
 
 [node name="Node2D" type="Node2D"]
@@ -23,29 +20,6 @@ max_rotation_speed = 0.85
 thrust_power = 180
 max_linear_speed = 145
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = 226.0
-offset_top = 35.0
-offset_right = 808.0
-offset_bottom = 71.0
-value = 100.0
-nine_patch_stretch = true
-stretch_margin_left = 6
-stretch_margin_top = 6
-stretch_margin_right = 6
-stretch_margin_bottom = 6
-texture_under = ExtResource("4_ked5i")
-texture_progress = ExtResource("5_n7gac")
-
-[node name="LabelPower" type="Label" parent="."]
-offset_left = 421.0
-offset_top = 2.0
-offset_right = 612.0
-offset_bottom = 40.0
-theme_override_font_sizes/font_size = 24
-text = "POWER"
-horizontal_alignment = 1
-
 [node name="LabelTime" type="Label" parent="."]
 offset_left = 1000.0
 offset_right = 1150.0
@@ -60,12 +34,10 @@ offset_left = 1000.0
 offset_top = 40.0
 offset_right = 1140.0
 offset_bottom = 80.0
-theme_override_font_sizes/font_size = 30
-text = "15"
 horizontal_alignment = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 325)
+position = Vector2(576, 324)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -79,9 +51,6 @@ monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-147, -203, 1377, -187, 1415, 932, -297, 974, -259, -114, -174, -129, -133, -64, -133, -64, -153, 862, 1329, 854, 1308, -128, -143, -111)
-
-[node name="Jetparticles" parent="." instance=ExtResource("7_70bwd")]
-position = Vector2(-438, 101)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("8_s83b5")]
 

@@ -15,7 +15,6 @@ extends RigidBody2D
 signal player_data_signal(velocity: Vector2, position: Vector2)
 
 func _ready():
-	$"../TextureProgressBar".value = power
 	power_bar.value = power
 
 func _integrate_forces(state):
@@ -39,7 +38,6 @@ func _integrate_forces(state):
 		var thrust = Vector2(0, -thrust_power).rotated(rotation)
 		apply_central_impulse(thrust * state.step)
 		power -= thrust_cost
-		$"../TextureProgressBar".value = power
 		power_bar.value = power
 		if power <= 0:
 			player_die()
@@ -57,7 +55,6 @@ func _on_body_entered(body):
 
 func _on_area_2d_body_entered(body):    
 	power -= collision_cost
-	$"../TextureProgressBar".value = power
 	power_bar.value = power
 	if power <= 0:
 		player_die()

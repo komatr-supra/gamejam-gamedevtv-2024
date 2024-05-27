@@ -6,10 +6,25 @@
 [ext_resource type="Texture2D" uid="uid://injacililmdw" path="res://sprites/meteorites/spaceMeteors_002.png" id="4_4jnmq"]
 [ext_resource type="Texture2D" uid="uid://by8ve8gig6ohs" path="res://sprites/meteorites/spaceMeteors_003.png" id="5_dmxlg"]
 [ext_resource type="Texture2D" uid="uid://d2ehsbe814fcm" path="res://sprites/meteorites/spaceMeteors_004.png" id="6_311mj"]
-[ext_resource type="PackedScene" uid="uid://ch1oibgwte7h6" path="res://scenes/falling objects/particles_falling_objects.tscn" id="7_18ijh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dhygs"]
 radius = 16.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_owq31"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(6, 6, 1)
+emission_shape = 2
+emission_sphere_radius = 3.0
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 8.0
+color = Color(0.658824, 0.439216, 0.101961, 0.760784)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eh25d"]
 radius = 17.0
@@ -31,7 +46,13 @@ texture = ExtResource("3_xcoxy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dhygs")
 
-[node name="particles" parent="." instance=ExtResource("7_18ijh")]
+[node name="particles" type="GPUParticles2D" parent="."]
+position = Vector2(-2, 2)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_owq31")
+one_shot = true
+local_coords = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

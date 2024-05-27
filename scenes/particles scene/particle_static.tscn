@@ -1,14 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://6xfubrtyfw2b"]
+[gd_scene load_steps=7 format=3 uid="uid://6xfubrtyfw2b"]
 
 [ext_resource type="Script" path="res://scenes/particles scene/particles.gd" id="1_umh3r"]
+
+[sub_resource type="Gradient" id="Gradient_sgm2h"]
+offsets = PackedFloat32Array(0, 0.178435, 0.945611, 0.983779)
+colors = PackedColorArray(1, 1, 1, 1, 0.692762, 0.678392, 0.829654, 1, 0.420217, 0.446708, 0.682987, 1, 0.360784, 0.360784, 0.360784, 0.87451)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tjw1s"]
+gradient = SubResource("Gradient_sgm2h")
+
+[sub_resource type="Curve" id="Curve_frliy"]
+_data = [Vector2(0.00420875, 0.285844), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hw00c"]
+curve = SubResource("Curve_frliy")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lc4w0"]
 lifetime_randomness = 0.14
 particle_flag_disable_z = true
 emission_shape_scale = Vector3(10, 10, 1)
 direction = Vector3(0, 0, 0)
-initial_velocity_min = 30.0
-initial_velocity_max = 50.0
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
 angular_velocity_min = -97.08
 angular_velocity_max = 97.08
 gravity = Vector3(0, 0, 0)
@@ -16,6 +30,8 @@ linear_accel_min = 50.0
 linear_accel_max = 200.0
 scale_min = 5.0
 scale_max = 10.0
+scale_curve = SubResource("CurveTexture_hw00c")
+color_ramp = SubResource("GradientTexture1D_tjw1s")
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_umh3r")
@@ -24,7 +40,7 @@ script = ExtResource("1_umh3r")
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_lc4w0")
-lifetime = 0.5
+lifetime = 0.25
 one_shot = true
 randomness = 1.0
 
