@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfwuwbvcku5yf"]
+
+[ext_resource type="Script" path="res://scenes/slideshow/intro.gd" id="1_vkdyc"]
+
+[node name="Intro" type="Node"]
+script = ExtResource("1_vkdyc")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TopMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MainLabel" type="Label" parent="MarginContainer/GridContainer/TopMarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Captain's Log, Stardate 4723.5
+
+We are currently navigating an asteroid-heavy region. The density and unpredictability of these celestial bodies pose a significant threat to our vessel.
+Our fuel reserves are critically low. Given the circumstances, I am uncertain if we have enough to make it back to the mothership.
+I must prioritize our crew's safety and attempt a return immediately. This may very well be our last stand if the fuel depletes before we clear this area."
+autowrap_mode = 2
+visible_characters = 32
+visible_characters_behavior = 1
+visible_ratio = 0.07
+
+[node name="FooterMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="FooterLabel" type="Label" parent="MarginContainer/GridContainer/FooterMarginContainer"]
+layout_mode = 2
+text = "Press SPACEBAR to skip"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

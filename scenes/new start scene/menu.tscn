@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg1hplh4vtyyd"]
+
+[ext_resource type="Script" path="res://scenes/new start scene/menu.gd" id="1_rb5ok"]
+
+[node name="Menu" type="Node"]
+script = ExtResource("1_rb5ok")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopMarginContainer" type="MarginContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="GridContainer/TopMarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/TopMarginContainer/CenterContainer"]
+layout_mode = 2
+text = "GAME NAME"
+
+[node name="BotMarginContainer" type="MarginContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="LeftMarginContainer" type="MarginContainer" parent="GridContainer/BotMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 96
+
+[node name="StartButton" type="Button" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer"]
+layout_mode = 2
+text = "START"
+
+[node name="RightMarginContainer" type="MarginContainer" parent="GridContainer/BotMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer"]
+layout_mode = 2
+text = "HOW TO PLAY:
+
+- A/D TO CONTROL YOUR SHIP'S ROTATION
+- SPACEBAR TO ACTIVATE BOOST
+
+- COLLECT FUEL CANNISTERS TO ADD FUEL
+- COLLECT WRENCH TO ADD HP
+- AVOID ASTEROIDS
+- SURVIVE FOR THE DURATION OF THE TRIP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_up" from="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/StartButton" to="." method="_on_start_button_up"]

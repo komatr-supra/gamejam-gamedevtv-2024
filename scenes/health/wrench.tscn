@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://8y53tsnr4yu7"]
+
+[ext_resource type="Texture2D" uid="uid://ccs11ftq1so1k" path="res://scenes/health/Wrench.png" id="1_sg5se"]
+[ext_resource type="Script" path="res://scenes/health/wrench.gd" id="1_tj70r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cfi1a"]
+radius = 24.0
+
+[node name="Wrench" type="Area2D"]
+script = ExtResource("1_tj70r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_sg5se")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cfi1a")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

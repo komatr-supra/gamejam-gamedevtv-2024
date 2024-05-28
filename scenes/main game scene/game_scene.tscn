@@ -1,46 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=12 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="2_ttlgl"]
-[ext_resource type="PackedScene" uid="uid://ysyoal0b4rtc" path="res://player.tscn" id="3_wbngf"]
+[ext_resource type="PackedScene" uid="uid://5puo8nygq1b0" path="res://scenes/fuel/fuel_cannister.tscn" id="3_glgdl"]
+[ext_resource type="PackedScene" uid="uid://8y53tsnr4yu7" path="res://scenes/health/wrench.tscn" id="4_htyl0"]
+[ext_resource type="PackedScene" uid="uid://sbenj0qdg1bj" path="res://scenes/player scene/new/player.tscn" id="5_dlp2k"]
 [ext_resource type="PackedScene" uid="uid://cu2fky2uwpfjd" path="res://scenes/end scene/end_scene.tscn" id="6_itygd"]
+[ext_resource type="Texture2D" uid="uid://8aesgm71qg6l" path="res://sprites/HealthBG.png" id="7_wwit4"]
 [ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="8_s83b5"]
+[ext_resource type="Texture2D" uid="uid://crifue1863v46" path="res://sprites/Health.png" id="8_ts6xn"]
+[ext_resource type="Texture2D" uid="uid://bhey3csoe3sai" path="res://sprites/HealthFull.png" id="9_qp6d4"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
+size = Vector2(1280, 16)
+
+[node name="GameScene" type="Node2D"]
 script = ExtResource("1_3072i")
 falling_object_scene = ExtResource("2_ttlgl")
+fuel_collect_scene = ExtResource("3_glgdl")
+health_collect_scene = ExtResource("4_htyl0")
 fall_delay = 0.35
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("3_wbngf")]
-position = Vector2(522, 224)
-mass = 0.2
-gravity_scale = 0.15
-rotation_speed = 1100
-max_rotation_speed = 0.85
-thrust_power = 180
-max_linear_speed = 145
+[node name="DeleteObjectArea" type="Area2D" parent="." groups=["delete_object"]]
+position = Vector2(640, 784)
 
-[node name="LabelTime" type="Label" parent="."]
-offset_left = 1000.0
-offset_right = 1150.0
-offset_bottom = 40.0
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 21
-text = "time survived"
-horizontal_alignment = 1
-
-[node name="timer" type="Label" parent="."]
-offset_left = 1000.0
-offset_top = 40.0
-offset_right = 1140.0
-offset_bottom = 80.0
-horizontal_alignment = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeleteObjectArea"]
+shape = SubResource("RectangleShape2D_qnm1o")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
+position = Vector2(640, 360)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="AsteroidTimer" type="Timer" parent="."]
 wait_time = 3.0
+autostart = true
+
+[node name="FuelTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="HealthTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 autostart = true
 
 [node name="EndScene" parent="." instance=ExtResource("6_itygd")]
@@ -50,11 +51,90 @@ z_index = 2
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-147, -203, 1377, -187, 1415, 932, -297, 974, -259, -114, -174, -129, -133, -64, -133, -64, -153, 862, 1329, 854, 1308, -128, -143, -111)
+polygon = PackedVector2Array(0, -16, 1296, -16, 1296, 736, -16, 736, -16, -16, 0, -16, 0, 720, 1280, 720, 1280, 0, 0, 0)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("8_s83b5")]
 
-[connection signal="player_data_signal" from="CharacterBody2D" to="ParallaxBackground" method="_on_character_body_2d_player_data_signal"]
-[connection signal="tree_exiting" from="CharacterBody2D" to="." method="player_died"]
-[connection signal="tree_exiting" from="CharacterBody2D" to="EndScene" method="game_over"]
-[connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="_on_body_entered"]
+[node name="Player" parent="." instance=ExtResource("5_dlp2k")]
+position = Vector2(586, 265)
+mass = 0.2
+gravity_scale = 0.15
+rotation_speed = 2200
+
+[node name="FallingObjectArea" type="Node2D" parent="."]
+position = Vector2(640, -96)
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GridContainer" type="GridContainer" parent="GUILayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopMarginContainer" type="MarginContainer" parent="GUILayer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="GUILayer/GridContainer/TopMarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="LeftMarginContainer" type="MarginContainer" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/LeftMarginContainer"]
+layout_mode = 2
+
+[node name="HealthProgressBar" type="TextureProgressBar" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+texture_under = ExtResource("7_wwit4")
+texture_over = ExtResource("8_ts6xn")
+texture_progress = ExtResource("9_qp6d4")
+
+[node name="ShipHealthLabel" type="Label" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
+layout_mode = 2
+text = "SHIP HEALTH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightMarginContainer" type="MarginContainer" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/RightMarginContainer"]
+layout_mode = 2
+
+[node name="TimeSurvivedLabel" type="Label" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 21
+text = "time survived"
+horizontal_alignment = 2
+
+[node name="TimerLabel" type="Label" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_alignment = 2
+
+[node name="BotMarginContainer" type="MarginContainer" parent="GUILayer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
