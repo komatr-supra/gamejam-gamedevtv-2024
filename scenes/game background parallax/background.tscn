@@ -1,14 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdcsnat8226eu"]
+[gd_scene load_steps=12 format=3 uid="uid://bdcsnat8226eu"]
 
 [ext_resource type="Script" path="res://scenes/game background parallax/background.gd" id="1_sgyub"]
 [ext_resource type="Script" path="res://scenes/game background parallax/bg_texture.gd" id="2_4yt02"]
+[ext_resource type="Script" path="res://scenes/game background parallax/OptionButton.gd" id="3_qj3ji"]
+[ext_resource type="Script" path="res://scenes/game background parallax/OptionButton2.gd" id="4_2llfo"]
+[ext_resource type="Resource" uid="uid://bor1ww2su4ody" path="res://resources/colors.tres" id="4_3yo2x"]
 
 [sub_resource type="Gradient" id="Gradient_jwyjb"]
-colors = PackedColorArray(0.0117647, 0.0980392, 0.247059, 1, 0.0470588, 0.00784314, 0.576471, 1)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.207207, 0.513514)
+colors = PackedColorArray(0, 0, 0, 1, 0.0117647, 0.0980392, 0.247059, 1, 7.21961e-08, 0.126246, 0.258943, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xydk4"]
-noise_type = 2
-frequency = 0.004
+noise_type = 5
+seed = -190
+frequency = 0.0005
+fractal_lacunarity = 2.78
+fractal_gain = 1.11
+fractal_weighted_strength = 0.61
+cellular_distance_function = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kq4pg"]
 width = 1280
@@ -17,20 +27,24 @@ seamless = true
 color_ramp = SubResource("Gradient_jwyjb")
 noise = SubResource("FastNoiseLite_xydk4")
 
-[sub_resource type="Gradient" id="Gradient_ht3fj"]
-colors = PackedColorArray(0.231373, 0.0784314, 0.262745, 0.196078, 0.478431, 0.0352941, 0.980392, 0.392157)
+[sub_resource type="Gradient" id="Gradient_lfmua"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.581081, 0.734234)
+colors = PackedColorArray(0.231373, 0.0784314, 0.262745, 0, 1, 0.921569, 0.341176, 0.392157, 0.352941, 0.772549, 0.309804, 0.392157)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_lteha"]
-frequency = 0.0026
-fractal_type = 2
-fractal_gain = 0.395
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o0w3t"]
+noise_type = 5
+frequency = 0.001
+fractal_lacunarity = 2.765
+fractal_gain = 1.15
+fractal_weighted_strength = 0.63
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s7pxq"]
 width = 1280
 height = 720
 seamless = true
-color_ramp = SubResource("Gradient_ht3fj")
-noise = SubResource("FastNoiseLite_lteha")
+color_ramp = SubResource("Gradient_lfmua")
+noise = SubResource("FastNoiseLite_o0w3t")
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 scale = Vector2(2, 2)
@@ -38,7 +52,7 @@ transform = Transform2D(2, 0, 0, 2, 0, 0)
 script = ExtResource("1_sgyub")
 
 [node name="BGLayer1" type="ParallaxLayer" parent="."]
-motion_scale = Vector2(0.2, 0.2)
+motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(0, 720)
 
 [node name="BGTexture1" type="TextureRect" parent="BGLayer1"]
@@ -48,7 +62,7 @@ texture = SubResource("NoiseTexture2D_kq4pg")
 script = ExtResource("2_4yt02")
 
 [node name="BGLayer2" type="ParallaxLayer" parent="."]
-motion_scale = Vector2(0.5, 0.5)
+motion_scale = Vector2(0.15, 0.15)
 motion_mirroring = Vector2(0, 720)
 
 [node name="BGTexture2" type="TextureRect" parent="BGLayer2"]
@@ -56,3 +70,37 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("NoiseTexture2D_s7pxq")
 script = ExtResource("2_4yt02")
+
+[node name="BGLayer3" type="ParallaxLayer" parent="."]
+visible = false
+motion_scale = Vector2(0.35, 0.35)
+motion_mirroring = Vector2(0, 720)
+
+[node name="BGTexture2" type="TextureRect" parent="BGLayer3"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("NoiseTexture2D_s7pxq")
+script = ExtResource("2_4yt02")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="OptionButton1" type="OptionButton" parent="CanvasLayer"]
+offset_left = 1062.0
+offset_top = 25.0
+offset_right = 1274.0
+offset_bottom = 60.0
+script = ExtResource("3_qj3ji")
+colors = ExtResource("4_3yo2x")
+
+[node name="OptionButton2" type="OptionButton" parent="CanvasLayer"]
+offset_left = 1062.0
+offset_top = 82.0
+offset_right = 1274.0
+offset_bottom = 117.0
+script = ExtResource("4_2llfo")
+
+[connection signal="item_selected" from="CanvasLayer/OptionButton1" to="CanvasLayer/OptionButton1" method="_on_item_selected"]
+[connection signal="option_color_changed" from="CanvasLayer/OptionButton1" to="BGLayer1/BGTexture1" method="_on_option_button_1_option_color_changed"]
+[connection signal="item_selected" from="CanvasLayer/OptionButton2" to="CanvasLayer/OptionButton2" method="_on_item_selected"]
+[connection signal="option_color_changed" from="CanvasLayer/OptionButton2" to="BGLayer1/BGTexture1" method="_on_option_button_2_option_color_changed"]
