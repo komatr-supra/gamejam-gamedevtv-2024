@@ -8,6 +8,7 @@ radius = 16.0
 height = 48.0
 
 [node name="FuelCannister" type="Area2D" groups=["fuel"]]
+modulate = Color(1.5, 1.5, 1.5, 1)
 script = ExtResource("1_mbm28")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -4,7 +4,7 @@ extends Area2D
 	#get_parent().fuel_exists = true
 
 func _process(delta):
-	position.y += 1
+	position.y += 200 * delta
 
 func _on_area_entered(area):
 	if area.is_in_group("player"):

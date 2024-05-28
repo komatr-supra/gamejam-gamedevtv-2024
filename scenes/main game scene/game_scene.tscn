@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=16 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="2_ttlgl"]
@@ -12,9 +12,21 @@
 [ext_resource type="Texture2D" uid="uid://bhey3csoe3sai" path="res://sprites/HealthFull.png" id="9_qp6d4"]
 [ext_resource type="PackedScene" uid="uid://dttnoca6h8g41" path="res://scenes/pause_scene/pause_scene.tscn" id="11_dx34h"]
 [ext_resource type="PackedScene" uid="uid://dybnflwyw1dvs" path="res://scenes/victory/victory_screen.tscn" id="12_iggr2"]
+[ext_resource type="Texture2D" uid="uid://da3bs2hof70lb" path="res://sprites/glow.png" id="13_x75c5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
 size = Vector2(2816, 16)
+
+[sub_resource type="Environment" id="Environment_8uyou"]
+background_mode = 3
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 1.0
+glow_levels/3 = 0.0
+glow_intensity = 0.3
+glow_blend_mode = 0
+glow_hdr_threshold = 0.9
+glow_hdr_luminance_cap = 2.0
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_3072i")
@@ -97,8 +109,8 @@ layout_mode = 2
 
 [node name="HealthProgressBar" type="TextureProgressBar" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
 layout_mode = 2
-max_value = 10.0
-value = 10.0
+max_value = 20.0
+value = 20.0
 texture_under = ExtResource("7_wwit4")
 texture_over = ExtResource("8_ts6xn")
 texture_progress = ExtResource("9_qp6d4")
@@ -148,3 +160,15 @@ visible = false
 
 [node name="VictoryScreen" parent="GUILayer" instance=ExtResource("12_iggr2")]
 visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8uyou")
+
+[node name="Lights" type="Node2D" parent="WorldEnvironment"]
+
+[node name="PointLight2D" type="PointLight2D" parent="WorldEnvironment/Lights"]
+position = Vector2(1279, -291)
+scale = Vector2(0.678516, 0.678516)
+shadow_filter = 1
+texture = ExtResource("13_x75c5")
+texture_scale = 40.0

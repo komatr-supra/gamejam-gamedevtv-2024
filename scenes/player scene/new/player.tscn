@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://sbenj0qdg1bj"]
+[gd_scene load_steps=19 format=3 uid="uid://sbenj0qdg1bj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_eiakb"]
 [ext_resource type="Texture2D" uid="uid://c7khvyhkwvpss" path="res://sprites/FuelEmpty.png" id="1_l8oj6"]
@@ -90,6 +90,9 @@ height = 432.0
 radius = 66.0
 height = 436.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qh6gh"]
+polygon = PackedVector2Array(-1, -147, 17, -126, 73, 37, 64, 53, 35, 35, 27, 56, 49, 89, 42, 104, -50, 102, -49, 87, -29, 56, -37, 15, -60, 40, -81, 31, -14, -132)
+
 [node name="Player" type="RigidBody2D" groups=["player"]]
 script = ExtResource("1_eiakb")
 
@@ -111,7 +114,6 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_4uo1t")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.731889
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -24)
@@ -127,6 +129,9 @@ shape = SubResource("CapsuleShape2D_if28d")
 
 [node name="GPUParticles2D" parent="." instance=ExtResource("4_5cftr")]
 scale = Vector2(2, 2)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_qh6gh")
 
 [connection signal="area_entered" from="PlayerArea" to="." method="_on_player_area_entered"]
 [connection signal="body_entered" from="PlayerArea" to="." method="_on_area_2d_body_entered"]
