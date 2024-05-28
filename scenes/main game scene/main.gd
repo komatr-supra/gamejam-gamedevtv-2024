@@ -1,5 +1,4 @@
 extends Node2D
-
 @export var falling_object_scene : PackedScene
 @export var fall_delay = 0.5
 var timer
@@ -20,7 +19,6 @@ func player_died():
 	is_player_alive = false
 
 func _process(delta):
-	
 	if is_player_alive:
 		if fall_delay > 0.1:
 			fall_delay -= 0.00001
