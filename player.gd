@@ -19,6 +19,7 @@ var thrust_enabled = false
 #@onready var power_bar : TextureProgressBar = $PowerBar
 
 signal player_data_signal(velocity: Vector2, position: Vector2)
+signal player_death_signal
 
 func _ready():
 	fuel_bar.value = SystemData.player_fuel
@@ -67,14 +68,12 @@ func _integrate_forces(state):
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		player_die()
-
-func _on_area_2d_body_entered(body):   
-	if body.is_in_group("asteroid"):
-		SystemData.player_health -= collision_cost
-		if SystemData.player_health <= 0:
-			player_die()
-
-
+#
+#func _on_area_2d_body_entered(body):   
+	#if body.is_in_group("asteroid"):
+		#SystemData.player_health -= collision_cost
+		#if SystemData.player_health <= 0:
+			#player_die()
 
 func player_die():
 	var particles = $GPUParticles2D
@@ -82,4 +81,5 @@ func player_die():
 	remove_child(particles);
 	particles.position = position
 	get_parent().add_child(particles)
+	player_death_signal.emit()
 	queue_free()
