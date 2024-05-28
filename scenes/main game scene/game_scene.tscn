@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=14 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="2_ttlgl"]
@@ -11,9 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://crifue1863v46" path="res://sprites/Health.png" id="8_ts6xn"]
 [ext_resource type="Texture2D" uid="uid://bhey3csoe3sai" path="res://sprites/HealthFull.png" id="9_qp6d4"]
 [ext_resource type="PackedScene" uid="uid://dttnoca6h8g41" path="res://scenes/pause_scene/pause_scene.tscn" id="11_dx34h"]
+[ext_resource type="PackedScene" uid="uid://dybnflwyw1dvs" path="res://scenes/victory/victory_screen.tscn" id="12_iggr2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
-size = Vector2(1280, 16)
+size = Vector2(2816, 16)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_3072i")
@@ -23,13 +24,15 @@ health_collect_scene = ExtResource("4_htyl0")
 fall_delay = 0.35
 
 [node name="DeleteObjectArea" type="Area2D" parent="." groups=["delete_object"]]
-position = Vector2(640, 784)
+position = Vector2(640, 1568)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeleteObjectArea"]
+position = Vector2(640, 0)
 shape = SubResource("RectangleShape2D_qnm1o")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(640, 360)
+position = Vector2(1280, 720)
+zoom = Vector2(0.5, 0.5)
 
 [node name="AsteroidTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -49,18 +52,19 @@ autostart = true
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(0, -16, 1296, -16, 1296, 736, -16, 736, -16, -16, 0, -16, 0, 720, 1280, 720, 1280, 0, 0, 0)
+polygon = PackedVector2Array(0, -16, 2568, -16, 2576, 1456, -16, 1456, -16, -16, 0, -16, 0, 1440, 2560, 1440, 2560, 0, 0, 0)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("8_s83b5")]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("5_dlp2k")]
-position = Vector2(586, 265)
+position = Vector2(1280, 720)
 mass = 0.2
 gravity_scale = 0.15
 rotation_speed = 2200
 
 [node name="FallingObjectArea" type="Node2D" parent="."]
-position = Vector2(640, -96)
+position = Vector2(1280, -96)
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 
@@ -141,4 +145,7 @@ theme_override_constants/margin_bottom = 16
 z_as_relative = false
 
 [node name="PauseScene" parent="GUILayer" instance=ExtResource("11_dx34h")]
+visible = false
+
+[node name="VictoryScreen" parent="GUILayer" instance=ExtResource("12_iggr2")]
 visible = false

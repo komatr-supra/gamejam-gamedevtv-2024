@@ -20,6 +20,7 @@ var thrust_enabled = false
 
 signal player_data_signal(velocity: Vector2, position: Vector2)
 signal player_death_signal
+signal no_fuel_signal
 
 func _ready():
 	fuel_bar.value = SystemData.player_fuel
@@ -50,13 +51,12 @@ func _integrate_forces(state):
 	# Aktivace a kontrola thrustu
 	if Input.is_action_pressed("thrust"):
 		var thrust = Vector2(0, -thrust_power).rotated(rotation)
-		apply_central_impulse(thrust * state.step)
-		SystemData.player_fuel -= thrust_cost
-		if SystemData.player_fuel <= 0:
-			player_die()
-			thrust_enabled = false
-		else:
+		if SystemData.player_fuel > 0:
+			apply_central_impulse(thrust * state.step)
+			SystemData.player_fuel -= thrust_cost
 			thrust_enabled = true
+		else:
+			thrust_enabled = false
 	#get_node("jet").thrust(thrust_enabled)
 
 	if Input.is_action_just_released("thrust"):
@@ -83,3 +83,8 @@ func player_die():
 	get_parent().add_child(particles)
 	player_death_signal.emit()
 	queue_free()
+
+func _on_player_area_entered(area):
+	if area.is_in_group("delete_object"):
+		if SystemData.player_fuel <= 0:
+			player_die()

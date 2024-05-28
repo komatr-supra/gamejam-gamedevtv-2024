@@ -128,4 +128,5 @@ shape = SubResource("CapsuleShape2D_if28d")
 [node name="GPUParticles2D" parent="." instance=ExtResource("4_5cftr")]
 scale = Vector2(2, 2)
 
+[connection signal="area_entered" from="PlayerArea" to="." method="_on_player_area_entered"]
 [connection signal="body_entered" from="PlayerArea" to="." method="_on_area_2d_body_entered"]
