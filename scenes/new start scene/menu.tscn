@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dg1hplh4vtyyd"]
+[gd_scene load_steps=7 format=3 uid="uid://dg1hplh4vtyyd"]
 
 [ext_resource type="Script" path="res://scenes/new start scene/menu.gd" id="1_rb5ok"]
 [ext_resource type="Texture2D" uid="uid://c6o2s1kjscxry" path="res://scenes/fuel/FuelBarrel.png" id="2_n0i4d"]
 [ext_resource type="Texture2D" uid="uid://ccs11ftq1so1k" path="res://scenes/health/Wrench.png" id="3_gncvv"]
+[ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="4_kshj4"]
+[ext_resource type="PackedScene" uid="uid://cn26jqfqdu51d" path="res://scenes/player scene/destruction_particles.tscn" id="5_l4p10"]
+[ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://scenes/particles scene/particle_static.tscn" id="6_sosn0"]
 
 [node name="Menu" type="Node"]
 script = ExtResource("1_rb5ok")
@@ -147,5 +150,14 @@ size_flags_vertical = 3
 texture = ExtResource("3_gncvv")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="RigidBody2D" parent="." instance=ExtResource("4_kshj4")]
+position = Vector2(-294, 320)
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("5_l4p10")]
+position = Vector2(-216, 152)
+
+[node name="Node2D" parent="." instance=ExtResource("6_sosn0")]
+position = Vector2(-223, 79)
 
 [connection signal="button_up" from="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/StartButton" to="." method="_on_start_button_up"]
