@@ -1,8 +1,0 @@
-[gd_resource type="BankAsset" format=3 uid="uid://cf37xyrhd8ky0"]
-
-[resource]
-file_path = "res://Custom/Music.bank"
-modified_time = 1716739105
-path = "bank:/Music"
-guid = "{19a667d8-462f-4b73-9625-170301f62863}"
-name = "Music"

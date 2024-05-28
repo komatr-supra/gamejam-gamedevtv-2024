@@ -1,9 +1,0 @@
-[gd_resource type="EventAsset" format=3 uid="uid://cwopdudw1a4xk"]
-
-[resource]
-is_oneshot = true
-min_distance = 1.0
-max_distance = 20.0
-path = "event:/SFX/Player/Dash"
-guid = "{97edb248-64e8-49b7-86e6-b0dd465dcc7e}"
-name = "Dash"
