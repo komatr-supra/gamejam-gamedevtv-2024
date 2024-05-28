@@ -1,15 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cu2fky2uwpfjd"]
+[gd_scene load_steps=2 format=3 uid="uid://dttnoca6h8g41"]
 
-[ext_resource type="Script" path="res://scenes/end scene/end_scene.gd" id="1_m6rwe"]
+[ext_resource type="Script" path="res://scenes/pause_scene/pause_scene.gd" id="1_45e5e"]
 
-[node name="EndScene" type="Control"]
+[node name="PauseScene" type="Control"]
+process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_m6rwe")
+script = ExtResource("1_45e5e")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -26,29 +27,17 @@ theme_override_constants/margin_bottom = 240
 [node name="GridContainer" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
 
+[node name="TopEmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="TopLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 27
-text = "YOU SURVIVED FOR:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SurvivalTime" type="Label" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BotLabel" type="Label" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 27
-text = "BETTER LUCK NEXT TIME!"
+text = "PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -67,9 +56,10 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="TryAgainButton" type="Button" parent="MarginContainer/GridContainer/GridContainer/LeftMarginContainer"]
+[node name="ResumeButton" type="Button" parent="MarginContainer/GridContainer/GridContainer/LeftMarginContainer"]
 layout_mode = 2
-text = "TRY AGAIN"
+text = "RESUME
+"
 
 [node name="EmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer/GridContainer"]
 layout_mode = 2
@@ -91,5 +81,10 @@ layout_mode = 2
 text = "RETURN
 TO MENU"
 
-[connection signal="button_up" from="MarginContainer/GridContainer/GridContainer/LeftMarginContainer/TryAgainButton" to="." method="_on_try_again_button_up"]
+[node name="BotEmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="button_up" from="MarginContainer/GridContainer/GridContainer/LeftMarginContainer/ResumeButton" to="." method="_on_resume_button_up"]
 [connection signal="button_up" from="MarginContainer/GridContainer/GridContainer/RightMarginContainer/MenuButton" to="." method="_on_menu_button_up"]

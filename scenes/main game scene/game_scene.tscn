@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=13 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="2_ttlgl"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="8_s83b5"]
 [ext_resource type="Texture2D" uid="uid://crifue1863v46" path="res://sprites/Health.png" id="8_ts6xn"]
 [ext_resource type="Texture2D" uid="uid://bhey3csoe3sai" path="res://sprites/HealthFull.png" id="9_qp6d4"]
+[ext_resource type="PackedScene" uid="uid://dttnoca6h8g41" path="res://scenes/pause_scene/pause_scene.tscn" id="11_dx34h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
 size = Vector2(1280, 16)
@@ -44,9 +45,6 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="EndScene" parent="." instance=ExtResource("6_itygd")]
-z_index = 2
-
 [node name="Area2D" type="Area2D" parent="."]
 monitorable = false
 
@@ -66,14 +64,14 @@ position = Vector2(640, -96)
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 
-[node name="GridContainer" type="GridContainer" parent="GUILayer"]
+[node name="MainGUIContainer" type="GridContainer" parent="GUILayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopMarginContainer" type="MarginContainer" parent="GUILayer/GridContainer"]
+[node name="TopMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -82,19 +80,19 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="GridContainer" type="GridContainer" parent="GUILayer/GridContainer/TopMarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="GUILayer/MainGUIContainer/TopMarginContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="LeftMarginContainer" type="MarginContainer" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer"]
+[node name="LeftMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/LeftMarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/LeftMarginContainer"]
 layout_mode = 2
 
-[node name="HealthProgressBar" type="TextureProgressBar" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
+[node name="HealthProgressBar" type="TextureProgressBar" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
 layout_mode = 2
 max_value = 10.0
 value = 10.0
@@ -102,35 +100,35 @@ texture_under = ExtResource("7_wwit4")
 texture_over = ExtResource("8_ts6xn")
 texture_progress = ExtResource("9_qp6d4")
 
-[node name="ShipHealthLabel" type="Label" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
+[node name="ShipHealthLabel" type="Label" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
 layout_mode = 2
 text = "SHIP HEALTH"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RightMarginContainer" type="MarginContainer" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer"]
+[node name="RightMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/RightMarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/RightMarginContainer"]
 layout_mode = 2
 
-[node name="TimeSurvivedLabel" type="Label" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
+[node name="TimeSurvivedLabel" type="Label" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 21
-text = "time survived"
+text = "TIME LEFT"
 horizontal_alignment = 2
 
-[node name="TimerLabel" type="Label" parent="GUILayer/GridContainer/TopMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
+[node name="TimerLabel" type="Label" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_alignment = 2
 
-[node name="BotMarginContainer" type="MarginContainer" parent="GUILayer/GridContainer"]
+[node name="BotMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -138,3 +136,9 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
+
+[node name="EndScene" parent="GUILayer" instance=ExtResource("6_itygd")]
+z_as_relative = false
+
+[node name="PauseScene" parent="GUILayer" instance=ExtResource("11_dx34h")]
+visible = false
