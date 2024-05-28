@@ -1,24 +1,37 @@
 extends RigidBody2D
 
-@export var rotation_speed = 10
-@export var max_rotation_speed = PI / 4  # Maximální rychlost rotace v radiánech za sekundu
+@onready var fuel_bar = $FuelBar
+@onready var sprite = $AnimatedSprite2D
 
-@export var thrust_power = 500
-@export var max_linear_speed = 500
+
+@export var rotation_speed = 1100
+@export var max_rotation_speed = 0.85 # PI / 4 Maximální rychlost rotace v radiánech za sekundu 
+
+@export var thrust_power = 180
+@export var max_linear_speed = 145
 @export var power: float = 100
 @export var thrust_cost: float = 0.1
-@export var collision_cost: int = 15
+@export var collision_cost: int = 1
 @export var death_particles: PackedScene
 
-@onready var power_bar : TextureProgressBar = $PowerBar
+var thrust_enabled = false
+
+#@onready var power_bar : TextureProgressBar = $PowerBar
 
 signal player_data_signal(velocity: Vector2, position: Vector2)
 
 func _ready():
-	power_bar.value = power
+	fuel_bar.value = SystemData.player_fuel
+
+func _process(delta):
+	if thrust_enabled:
+		sprite.animation = "moving"
+	else:
+		sprite.animation = "idle"
+
+	fuel_bar.value = SystemData.player_fuel
 
 func _integrate_forces(state):
-	var thrust_enabled = false
 	var current_angular_velocity = angular_velocity  # Aktuální úhlová rychlost
 	
 	# Ovládání rotace
@@ -37,14 +50,16 @@ func _integrate_forces(state):
 	if Input.is_action_pressed("thrust"):
 		var thrust = Vector2(0, -thrust_power).rotated(rotation)
 		apply_central_impulse(thrust * state.step)
-		power -= thrust_cost
-		power_bar.value = power
-		if power <= 0:
+		SystemData.player_fuel -= thrust_cost
+		if SystemData.player_fuel <= 0:
 			player_die()
 			thrust_enabled = false
 		else:
 			thrust_enabled = true
-	get_node("jet").thrust(thrust_enabled)
+	#get_node("jet").thrust(thrust_enabled)
+
+	if Input.is_action_just_released("thrust"):
+		thrust_enabled = false
 
 	player_data_signal.emit(linear_velocity, global_position)
 
@@ -53,11 +68,13 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		player_die()
 
-func _on_area_2d_body_entered(body):    
-	power -= collision_cost
-	power_bar.value = power
-	if power <= 0:
-		player_die()
+func _on_area_2d_body_entered(body):   
+	if body.is_in_group("asteroid"):
+		SystemData.player_health -= collision_cost
+		if SystemData.player_health <= 0:
+			player_die()
+
+
 
 func player_die():
 	var particles = $GPUParticles2D

@@ -1,7 +1,10 @@
 extends RigidBody2D
+
 @export var particles : PackedScene
 @export var meteorites: Array[Texture2D] = []
+
 var speed_increase = 0
+
 func _ready():
 	if meteorites.size() > 0:
 		$Sprite2D.texture = meteorites[randi() % meteorites.size()]
@@ -26,7 +29,11 @@ func particles_create():
 func destroy():
 	queue_free()
 
-
 func _on_body_entered(body):
-	print("creating particle")
-	particles_create()
+	if body.is_in_group("player"):
+		print("creating particle")
+		particles_create()
+
+func _on_area_entered(area):
+	if area.is_in_group("delete_object"):
+		self.queue_free()
