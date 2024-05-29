@@ -17,11 +17,14 @@ extends Node2D
 @onready var victory_screen = $GUILayer/VictoryScreen
 @onready var no_fuel_rich_text_label = $GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer/NoFuelRichTextLabel
 @onready var no_fuel_blink_timer = $GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer/NoFuelBlinkTimer
+@onready var shield_cooldown_label = $GUILayer/MainGUIContainer/BotMarginContainer/GridContainer/LeftMarginContainer/ShieldCooldownLabel
+
 
 
 var is_player_alive: bool = true
 var game_end: bool = false
 var sent_fuel_signal: bool = false
+var player_has_shield: bool = true
 
 signal game_win_signal
 signal low_fuel_signal
@@ -33,6 +36,7 @@ func _ready():
 	SystemData.player_health = 20
 	SystemData.time_left = 180
 	SystemData.time_survived = 0
+	SystemData.shield_health = 5
 
 	asteroid_timer.connect("timeout", _on_FallingObjectTimer_timeout)
 	asteroid_timer.start()
@@ -44,6 +48,7 @@ func _ready():
 	health_timer.connect("timeout", _on_HealthTimer_timeout)
 
 	player.connect("player_death_signal", player_death)
+	player.connect("shield_destroyed_signal", shield_destroyed)
 
 func _process(delta):
 	var mils = fmod(SystemData.time_left, 1) * 100
@@ -65,6 +70,9 @@ func _process(delta):
 
 	if SystemData.player_fuel <= 25 && !sent_fuel_signal:
 		low_fuel_signal.emit()
+
+	if !player_has_shield && is_player_alive:
+		shield_cooldown_label.text = "SHIELD COOLDOWN: " + str(snappedf(player.shield_cooldown_timer.time_left, 0.1))
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -89,9 +97,14 @@ func _on_HealthTimer_timeout():
 	health_object.position = Vector2(randi_range(16, (get_viewport_rect().size.x * 2) - 16), falling_object_area.global_position.y)
 
 func on_player_hit():
-	SystemData.player_health -= SystemData.collision_cost
-	if SystemData.player_health <= 0:
-		player.player_die()
+	if SystemData.shield_health > 0:
+		SystemData.shield_health -= SystemData.collision_cost
+		if SystemData.shield_health <= 0:
+			player.destroy_shield()
+	else:
+		SystemData.player_health -= SystemData.collision_cost
+		if SystemData.player_health <= 0:
+			player.player_die()
 
 func game_win():
 	victory_screen.show()
@@ -118,6 +131,14 @@ func no_fuel():
 
 	if !is_player_alive:
 		no_fuel_rich_text_label.visible = false
+
+func shield_destroyed():
+	if SystemData.shield_health <= 0:
+		shield_cooldown_label.visible = true
+		player_has_shield = false
+	else:
+		shield_cooldown_label.visible = false
+		player_has_shield = true
 
 func player_death():
 	end_scene.game_over()

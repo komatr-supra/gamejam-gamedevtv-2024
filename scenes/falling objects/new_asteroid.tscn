@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=3 uid="uid://bjxr0iep468t3"]
+
+[ext_resource type="Script" path="res://scenes/falling objects/falling_object.gd" id="1_hbupp"]
+[ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://scenes/particles scene/particle_static.tscn" id="2_bpxom"]
+[ext_resource type="Texture2D" uid="uid://8i8hfh4se21c" path="res://scenes/falling objects/sprites/LargeAsteroid.png" id="3_ntxf5"]
+[ext_resource type="Texture2D" uid="uid://orem7xn442bl" path="res://scenes/falling objects/sprites/MediumAsteroid.png" id="4_64txx"]
+[ext_resource type="Texture2D" uid="uid://b30wgu8dhdwwo" path="res://scenes/falling objects/sprites/SmallAsteroid.png" id="5_5h0ln"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_owq31"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(6, 6, 1)
+emission_shape = 2
+emission_sphere_radius = 3.0
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 8.0
+color = Color(0.658824, 0.439216, 0.101961, 0.760784)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eh25d"]
+radius = 57.0789
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rauxm"]
+radius = 33.2415
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bgdo8"]
+radius = 18.0278
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cdmys"]
+radius = 56.2228
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kq4tb"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yru7x"]
+radius = 17.0
+
+[node name="RigidBody2D" type="RigidBody2D" groups=["asteroid"]]
+collision_layer = 3
+collision_mask = 3
+mass = 0.35
+gravity_scale = 0.0
+script = ExtResource("1_hbupp")
+particles = ExtResource("2_bpxom")
+
+[node name="particles" type="GPUParticles2D" parent="."]
+position = Vector2(-2, 2)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_owq31")
+one_shot = true
+local_coords = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="LargeAsteroid" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="LargeAsteroid"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_ntxf5")
+
+[node name="Area2D" type="Area2D" parent="LargeAsteroid" groups=["asteroid"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LargeAsteroid/Area2D"]
+position = Vector2(-9, 0)
+shape = SubResource("CircleShape2D_eh25d")
+disabled = true
+
+[node name="MediumAsteroid" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="MediumAsteroid"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_64txx")
+
+[node name="Area2D" type="Area2D" parent="MediumAsteroid" groups=["asteroid"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MediumAsteroid/Area2D"]
+shape = SubResource("CircleShape2D_rauxm")
+disabled = true
+
+[node name="SmallAsteroid" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="SmallAsteroid"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_5h0ln")
+
+[node name="Area2D" type="Area2D" parent="SmallAsteroid" groups=["asteroid"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallAsteroid/Area2D"]
+shape = SubResource("CircleShape2D_bgdo8")
+disabled = true
+
+[node name="LargeCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9, 0)
+shape = SubResource("CircleShape2D_cdmys")
+disabled = true
+
+[node name="MediumCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kq4tb")
+disabled = true
+
+[node name="SmallCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yru7x")
+disabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="destroy"]
+[connection signal="area_entered" from="LargeAsteroid/Area2D" to="." method="_on_body_entered"]
+[connection signal="area_entered" from="LargeAsteroid/Area2D" to="." method="_on_area_entered"]
+[connection signal="area_entered" from="MediumAsteroid/Area2D" to="." method="_on_body_entered"]
+[connection signal="area_entered" from="MediumAsteroid/Area2D" to="." method="_on_area_entered"]
+[connection signal="area_entered" from="SmallAsteroid/Area2D" to="." method="_on_body_entered"]
+[connection signal="area_entered" from="SmallAsteroid/Area2D" to="." method="_on_area_entered"]

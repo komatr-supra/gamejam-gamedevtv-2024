@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
-[ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="2_ttlgl"]
+[ext_resource type="PackedScene" uid="uid://bjxr0iep468t3" path="res://scenes/falling objects/new_asteroid.tscn" id="2_5md3b"]
 [ext_resource type="PackedScene" uid="uid://5puo8nygq1b0" path="res://scenes/fuel/fuel_cannister.tscn" id="3_glgdl"]
 [ext_resource type="PackedScene" uid="uid://8y53tsnr4yu7" path="res://scenes/health/wrench.tscn" id="4_htyl0"]
 [ext_resource type="PackedScene" uid="uid://sbenj0qdg1bj" path="res://scenes/player scene/new/player.tscn" id="5_dlp2k"]
@@ -29,13 +29,13 @@ glow_hdr_luminance_cap = 2.0
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_3072i")
-falling_object_scene = ExtResource("2_ttlgl")
+falling_object_scene = ExtResource("2_5md3b")
 fuel_collect_scene = ExtResource("3_glgdl")
 health_collect_scene = ExtResource("4_htyl0")
 fall_delay = 0.35
 
 [node name="DeleteObjectArea" type="Area2D" parent="." groups=["delete_object"]]
-position = Vector2(640, 1568)
+position = Vector2(640, 1832)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeleteObjectArea"]
 position = Vector2(640, 0)
@@ -164,6 +164,27 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="GUILayer/MainGUIContainer/BotMarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="LeftMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/BotMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ShieldCooldownLabel" type="Label" parent="GUILayer/MainGUIContainer/BotMarginContainer/GridContainer/LeftMarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "SHIELD COOLDOWN: "
+
+[node name="RightMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/BotMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="EndScene" parent="GUILayer" instance=ExtResource("6_itygd")]
 z_as_relative = false
