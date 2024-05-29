@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=15 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="2_ttlgl"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://bhey3csoe3sai" path="res://sprites/HealthFull.png" id="9_qp6d4"]
 [ext_resource type="PackedScene" uid="uid://dttnoca6h8g41" path="res://scenes/pause_scene/pause_scene.tscn" id="11_dx34h"]
 [ext_resource type="PackedScene" uid="uid://dybnflwyw1dvs" path="res://scenes/victory/victory_screen.tscn" id="12_iggr2"]
-[ext_resource type="Texture2D" uid="uid://da3bs2hof70lb" path="res://sprites/glow.png" id="13_x75c5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
 size = Vector2(2816, 16)
@@ -97,7 +96,7 @@ theme_override_constants/margin_bottom = 16
 
 [node name="GridContainer" type="GridContainer" parent="GUILayer/MainGUIContainer/TopMarginContainer"]
 layout_mode = 2
-columns = 2
+columns = 3
 
 [node name="LeftMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer"]
 layout_mode = 2
@@ -120,6 +119,20 @@ layout_mode = 2
 text = "SHIP HEALTH"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MidMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NoFuelRichTextLabel" type="RichTextLabel" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer"]
+visible = false
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img]
+NO FUEL LEFT![/center]"
+
+[node name="NoFuelBlinkTimer" type="Timer" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer"]
 
 [node name="RightMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer"]
 layout_mode = 2
@@ -170,5 +183,6 @@ environment = SubResource("Environment_8uyou")
 position = Vector2(1279, -291)
 scale = Vector2(0.678516, 0.678516)
 shadow_filter = 1
-texture = ExtResource("13_x75c5")
 texture_scale = 40.0
+
+[connection signal="timeout" from="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer/NoFuelBlinkTimer" to="." method="no_fuel"]

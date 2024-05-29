@@ -15,11 +15,16 @@ extends Node2D
 @onready var end_scene = $GUILayer/EndScene
 @onready var pause_scene = $GUILayer/PauseScene
 @onready var victory_screen = $GUILayer/VictoryScreen
+@onready var no_fuel_rich_text_label = $GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer/NoFuelRichTextLabel
+@onready var no_fuel_blink_timer = $GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer/NoFuelBlinkTimer
 
-var is_player_alive = true
-var game_end = false
+
+var is_player_alive: bool = true
+var game_end: bool = false
+var sent_fuel_signal: bool = false
 
 signal game_win_signal
+signal low_fuel_signal
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -33,6 +38,7 @@ func _ready():
 	asteroid_timer.start()
 
 	game_win_signal.connect(game_win)
+	low_fuel_signal.connect(no_fuel)
 
 	fuel_timer.connect("timeout", _on_FuelTimer_timeout)
 	health_timer.connect("timeout", _on_HealthTimer_timeout)
@@ -56,6 +62,9 @@ func _process(delta):
 			game_end = true
 
 	health_progress_bar.value = SystemData.player_health
+
+	if SystemData.player_fuel <= 25 && !sent_fuel_signal:
+		low_fuel_signal.emit()
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -87,6 +96,28 @@ func on_player_hit():
 func game_win():
 	victory_screen.show()
 	player.queue_free()
+
+func no_fuel():
+	if SystemData.player_fuel > 25:
+		sent_fuel_signal = false
+
+	if SystemData.player_fuel <= 25 && is_player_alive:
+		sent_fuel_signal = true
+
+		if SystemData.player_fuel > 0:
+			no_fuel_rich_text_label.bbcode_text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img]\nLOW FUEL![/center]"
+		else:
+			no_fuel_rich_text_label.bbcode_text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img]\nNO FUEL LEFT![/center]"
+
+		if no_fuel_rich_text_label.visible:
+			no_fuel_rich_text_label.visible = false
+		else:
+			no_fuel_rich_text_label.visible = true
+
+	no_fuel_blink_timer.start(0.5)
+
+	if !is_player_alive:
+		no_fuel_rich_text_label.visible = false
 
 func player_death():
 	end_scene.game_over()
