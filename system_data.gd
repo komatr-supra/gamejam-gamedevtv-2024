@@ -3,6 +3,7 @@ extends Node
 var max_time = 180
 var time_left = 180
 var time_survived = 0
+var time_outside_screen = 10
 
 var player_fuel: float = 100
 
