@@ -19,12 +19,16 @@ extends Node2D
 @onready var no_fuel_blink_timer = $GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer/NoFuelBlinkTimer
 @onready var shield_cooldown_label = $GUILayer/MainGUIContainer/BotMarginContainer/GridContainer/LeftMarginContainer/ShieldCooldownLabel
 
+@onready var outside_grid_container = $GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer
+@onready var outside_countdown_label = $GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/CountdownLabel
+
 
 
 var is_player_alive: bool = true
 var game_end: bool = false
 var sent_fuel_signal: bool = false
 var player_has_shield: bool = true
+var is_outside_screen: bool = false
 
 signal game_win_signal
 signal low_fuel_signal
@@ -39,6 +43,7 @@ func _ready():
 	SystemData.shield_health = 5
 	SystemData.health_collected = 0
 	SystemData.fuel_collected = 0
+	SystemData.time_outside_screen = 10
 
 	health_progress_bar.max_value = SystemData.player_health + SystemData.shield_health
 
@@ -78,6 +83,15 @@ func _process(delta):
 
 	if !player_has_shield && is_player_alive && !game_end:
 		shield_cooldown_label.text = "SHIELD COOLDOWN: " + str(snappedf(player.shield_cooldown_timer.time_left, 0.1))
+
+	if is_outside_screen && is_player_alive:
+		SystemData.time_outside_screen -= delta
+
+		if SystemData.time_outside_screen > 0:
+			outside_countdown_label.text = str(snapped(SystemData.time_outside_screen, 1))
+		elif SystemData.time_outside_screen <= 0:
+			outside_grid_container.visible = false
+			player.player_die()
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -148,3 +162,18 @@ func shield_destroyed():
 func player_death():
 	end_scene.game_over()
 	is_player_alive = false
+
+func _on_viewport_area_entered(area):
+	if area.is_in_group("player"):
+		if is_outside_screen:
+			is_outside_screen = false
+
+func _on_viewport_area_exited(area):
+	if area.is_in_group("player"):
+		if player.global_position.x >= 0 && player.global_position.x <= 2560 && player.global_position.y >= 0 && player.global_position.y <= 1440:
+			outside_grid_container.visible = false
+			SystemData.time_outside_screen = 10
+			is_outside_screen = false
+		else:
+			outside_grid_container.visible = true
+			is_outside_screen = true
