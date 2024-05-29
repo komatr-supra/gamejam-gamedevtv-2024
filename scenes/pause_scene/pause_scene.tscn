@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dttnoca6h8g41"]
+[gd_scene load_steps=4 format=3 uid="uid://dttnoca6h8g41"]
 
 [ext_resource type="Script" path="res://scenes/pause_scene/pause_scene.gd" id="1_45e5e"]
 [ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_0kn1h"]
+[ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="3_cgs3g"]
 
 [node name="PauseScene" type="Control"]
 process_mode = 2
@@ -91,6 +92,8 @@ TO MENU"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("3_cgs3g")]
 
 [connection signal="button_up" from="MarginContainer/GridContainer/GridContainer/LeftMarginContainer/ResumeButton" to="." method="_on_resume_button_up"]
 [connection signal="button_up" from="MarginContainer/GridContainer/GridContainer/RightMarginContainer/MenuButton" to="." method="_on_menu_button_up"]
