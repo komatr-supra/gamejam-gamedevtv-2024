@@ -14,12 +14,19 @@ extends RigidBody2D
 @export var collision_cost: int = 1
 @export var death_particles: PackedScene
 
+@onready var shield_collision = $ShieldArea/CollisionShape2D
+@onready var shield_sprite = $ShieldArea/AnimatedSprite2D
+@onready var shield_cooldown_timer = $ShieldArea/ShieldCooldown
+
 var thrust_enabled = false
+
+var shield_time_left: float
 
 #@onready var power_bar : TextureProgressBar = $PowerBar
 
 signal player_data_signal(velocity: Vector2, position: Vector2)
 signal player_death_signal
+signal shield_destroyed_signal
 
 func _ready():
 	fuel_bar.value = SystemData.player_fuel
@@ -31,6 +38,9 @@ func _process(delta):
 		sprite.animation = "idle"
 
 	fuel_bar.value = SystemData.player_fuel
+
+	if SystemData.shield_health <= 0:
+		shield_time_left = shield_cooldown_timer.time_left
 
 func _integrate_forces(state):
 	var current_angular_velocity = angular_velocity  # Aktuální úhlová rychlost
@@ -73,6 +83,18 @@ func _on_body_entered(body):
 		#SystemData.player_health -= collision_cost
 		#if SystemData.player_health <= 0:
 			#player_die()
+
+func destroy_shield():
+	shield_destroyed_signal.emit()
+	shield_collision.disabled = true
+	shield_sprite.visible = false
+	shield_cooldown_timer.start(SystemData.shield_cooldown)
+
+func _on_shield_cooldown_timeout():
+	SystemData.shield_health = 5
+	shield_destroyed_signal.emit()
+	shield_collision.disabled = false
+	shield_sprite.visible = true
 
 func player_die():
 	var particles = $GPUParticles2D

@@ -8,3 +8,6 @@ var player_fuel: float = 100
 
 var collision_cost: int = 1
 var player_health: int = 20
+
+var shield_health: int = 5
+var shield_cooldown: int = 20
