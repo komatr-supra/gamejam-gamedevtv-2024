@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bhey3csoe3sai" path="res://sprites/HealthFull.png" id="9_qp6d4"]
 [ext_resource type="PackedScene" uid="uid://dttnoca6h8g41" path="res://scenes/pause_scene/pause_scene.tscn" id="11_dx34h"]
 [ext_resource type="PackedScene" uid="uid://dybnflwyw1dvs" path="res://scenes/victory/victory_screen.tscn" id="12_iggr2"]
-[ext_resource type="AudioStream" uid="uid://piupd30v0klc" path="res://Bonus/SongPlaceholder.wav" id="13_bl4xy"]
+[ext_resource type="AudioStream" uid="uid://eyhht1ggaqt" path="res://Bonus/fight.ogg" id="13_p2uwh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
 size = Vector2(2816, 16)
@@ -208,7 +208,7 @@ shadow_filter = 1
 texture_scale = 40.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_bl4xy")
+stream = ExtResource("13_p2uwh")
 volume_db = -10.0
 autoplay = true
 
