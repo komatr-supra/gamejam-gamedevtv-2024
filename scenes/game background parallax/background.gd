@@ -1,8 +1,8 @@
 extends ParallaxBackground
 
 
-@export var base_scroll : float = 200
-@export var additional_scroll : float = 200
+@export var base_scroll : float = 0
+@export var additional_scroll : float = 0
 
 var norm_y: float
 

@@ -4,15 +4,15 @@
 [ext_resource type="Script" path="res://scenes/fuel/fuel_cannister.gd" id="1_mbm28"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dvuoe"]
-radius = 16.0
-height = 48.0
+radius = 55.0
+height = 204.0
 
 [node name="FuelCannister" type="Area2D" groups=["fuel"]]
 modulate = Color(1.5, 1.5, 1.5, 1)
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_mbm28")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_bhwad")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=16 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bjxr0iep468t3" path="res://scenes/falling objects/new_asteroid.tscn" id="2_5md3b"]
@@ -13,23 +13,10 @@
 [ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="10_o8iod"]
 [ext_resource type="PackedScene" uid="uid://dttnoca6h8g41" path="res://scenes/pause_scene/pause_scene.tscn" id="11_dx34h"]
 [ext_resource type="PackedScene" uid="uid://dybnflwyw1dvs" path="res://scenes/victory/victory_screen.tscn" id="12_iggr2"]
-
 [ext_resource type="AudioStream" uid="uid://eyhht1ggaqt" path="res://Bonus/fight.ogg" id="13_p2uwh"]
-
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
 size = Vector2(2816, 16)
-
-[sub_resource type="Environment" id="Environment_8uyou"]
-background_mode = 3
-glow_enabled = true
-glow_levels/1 = 1.0
-glow_levels/2 = 1.0
-glow_levels/3 = 0.0
-glow_intensity = 0.3
-glow_blend_mode = 0
-glow_hdr_threshold = 0.9
-glow_hdr_luminance_cap = 2.0
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_3072i")
@@ -203,17 +190,6 @@ visible = false
 
 [node name="VictoryScreen" parent="GUILayer" instance=ExtResource("12_iggr2")]
 visible = false
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_8uyou")
-
-[node name="Lights" type="Node2D" parent="WorldEnvironment"]
-
-[node name="PointLight2D" type="PointLight2D" parent="WorldEnvironment/Lights"]
-position = Vector2(1279, -291)
-scale = Vector2(0.678516, 0.678516)
-shadow_filter = 1
-texture_scale = 40.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_p2uwh")

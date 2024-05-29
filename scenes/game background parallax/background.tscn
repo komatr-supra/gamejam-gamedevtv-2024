@@ -1,33 +1,34 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdcsnat8226eu"]
+[gd_scene load_steps=18 format=3 uid="uid://bdcsnat8226eu"]
 
 [ext_resource type="Script" path="res://scenes/game background parallax/background.gd" id="1_sgyub"]
 [ext_resource type="Script" path="res://scenes/game background parallax/bg_texture.gd" id="2_4yt02"]
 
-[sub_resource type="Gradient" id="Gradient_jwyjb"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.207207, 0.513514)
-colors = PackedColorArray(0, 0, 0, 1, 0.0117647, 0.0980392, 0.247059, 1, 7.21961e-08, 0.126246, 0.258943, 1)
+[sub_resource type="Gradient" id="Gradient_lnxkt"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0.411765, 0.666667, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xydk4"]
-noise_type = 5
-seed = -190
-frequency = 0.0005
-fractal_lacunarity = 2.78
-fractal_gain = 1.11
-fractal_weighted_strength = 0.61
-cellular_distance_function = 1
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jnkle"]
+gradient = SubResource("Gradient_lnxkt")
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kq4pg"]
+[sub_resource type="Gradient" id="Gradient_7m03q"]
+colors = PackedColorArray(0, 0.799067, 0.97064, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e3103"]
+gradient = SubResource("Gradient_7m03q")
 width = 1280
-height = 720
-seamless = true
-color_ramp = SubResource("Gradient_jwyjb")
-noise = SubResource("FastNoiseLite_xydk4")
+
+[sub_resource type="Gradient" id="Gradient_bijw3"]
+colors = PackedColorArray(0, 0.796078, 0.968627, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xxarb"]
+gradient = SubResource("Gradient_bijw3")
+fill_from = Vector2(0.517094, 1)
+fill_to = Vector2(0.474359, 0)
 
 [sub_resource type="Gradient" id="Gradient_lfmua"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.581081, 0.734234)
-colors = PackedColorArray(0.231373, 0.0784314, 0.262745, 0, 1, 0.921569, 0.341176, 0.392157, 0.352941, 0.772549, 0.309804, 0.392157)
+colors = PackedColorArray(0.231373, 0.0784314, 0.262745, 0, 1, 0.921569, 0.341176, 0.392157, 1, 1, 1, 0.392157)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_o0w3t"]
 noise_type = 5
@@ -43,22 +44,77 @@ seamless = true
 color_ramp = SubResource("Gradient_lfmua")
 noise = SubResource("FastNoiseLite_o0w3t")
 
+[sub_resource type="Gradient" id="Gradient_6ombw"]
+resource_local_to_scene = true
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.324324, 0.355856)
+colors = PackedColorArray(0, 0.223529, 0.427451, 1, 0.0117647, 0.0980392, 0.247059, 1, 0, 0.411765, 0.666667, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_45mj8"]
+noise_type = 5
+seed = -190
+frequency = 0.0005
+fractal_octaves = 4
+fractal_lacunarity = 2.715
+fractal_gain = 1.075
+fractal_weighted_strength = 0.27
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kq4pg"]
+width = 1280
+height = 720
+seamless = true
+color_ramp = SubResource("Gradient_6ombw")
+noise = SubResource("FastNoiseLite_45mj8")
+
+[sub_resource type="Gradient" id="Gradient_e650f"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.306306, 0.351351)
+colors = PackedColorArray(0, 0.223529, 0.427451, 0.235294, 0.0745098, 0.0745098, 0.0745098, 0.235294, 1, 1, 1, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_x1gd3"]
+noise_type = 5
+frequency = 0.0005
+fractal_lacunarity = 2.305
+fractal_gain = 1.62
+fractal_weighted_strength = 0.35
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yd3p0"]
+width = 1280
+height = 720
+seamless = true
+color_ramp = SubResource("Gradient_e650f")
+noise = SubResource("FastNoiseLite_x1gd3")
+
 [node name="ParallaxBackground" type="ParallaxBackground"]
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
 script = ExtResource("1_sgyub")
+base_scroll = 200.0
+additional_scroll = 200.0
+
+[node name="SolidBG" type="TextureRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = SubResource("GradientTexture1D_jnkle")
 
 [node name="BGLayer1" type="ParallaxLayer" parent="."]
+visible = false
 motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(0, 720)
 
 [node name="BGTexture1" type="TextureRect" parent="BGLayer1"]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("NoiseTexture2D_kq4pg")
-script = ExtResource("2_4yt02")
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = SubResource("GradientTexture1D_e3103")
+
+[node name="TextureRect" type="TextureRect" parent="BGLayer1"]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = SubResource("GradientTexture2D_xxarb")
 
 [node name="BGLayer2" type="ParallaxLayer" parent="."]
+visible = false
 motion_scale = Vector2(0.15, 0.15)
 motion_mirroring = Vector2(0, 720)
 
@@ -79,20 +135,22 @@ offset_bottom = 40.0
 texture = SubResource("NoiseTexture2D_s7pxq")
 script = ExtResource("2_4yt02")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="BGLayer4" type="ParallaxLayer" parent="."]
 visible = false
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(0, 720)
 
-[node name="OptionButton1" type="OptionButton" parent="CanvasLayer"]
-offset_left = 1062.0
-offset_top = 25.0
-offset_right = 1274.0
-offset_bottom = 60.0
+[node name="BGTexture4" type="TextureRect" parent="BGLayer4"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("NoiseTexture2D_kq4pg")
+script = ExtResource("2_4yt02")
 
-[node name="OptionButton2" type="OptionButton" parent="CanvasLayer"]
-offset_left = 1062.0
-offset_top = 82.0
-offset_right = 1274.0
-offset_bottom = 117.0
+[node name="BGLayer5" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(0, 720)
 
-[connection signal="item_selected" from="CanvasLayer/OptionButton1" to="CanvasLayer/OptionButton1" method="_on_item_selected"]
-[connection signal="item_selected" from="CanvasLayer/OptionButton2" to="CanvasLayer/OptionButton2" method="_on_item_selected"]
+[node name="BGTexture5" type="TextureRect" parent="BGLayer5"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("NoiseTexture2D_yd3p0")

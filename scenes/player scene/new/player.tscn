@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://sbenj0qdg1bj"]
+[gd_scene load_steps=40 format=3 uid="uid://sbenj0qdg1bj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_eiakb"]
 [ext_resource type="Texture2D" uid="uid://c7khvyhkwvpss" path="res://sprites/FuelEmpty.png" id="1_l8oj6"]
@@ -231,25 +231,73 @@ animations = [{
 "texture": null
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_b2obg")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_yynfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsykh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bimw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_typw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcf7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0g0ob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuh74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lai8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skd1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6mpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_of26g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmaj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lp7lu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jyd5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yryhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bd4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8cb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agek7")
 }, {
 "duration": 1.0,
 "texture": null
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 20.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_if28d"]
 radius = 66.0
 height = 436.0
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qh6gh"]
-polygon = PackedVector2Array(-1, -147, 17, -126, 73, 37, 64, 53, 35, 35, 27, 56, 49, 89, 42, 104, -50, 102, -49, 87, -29, 56, -37, 15, -60, 40, -81, 31, -14, -132)
 
 [node name="Player" type="RigidBody2D" groups=["player"]]
 script = ExtResource("1_eiakb")
@@ -270,7 +318,7 @@ texture_progress = ExtResource("2_ltdy0")
 rotation = 0.0698132
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_4uo1t")
-animation = &"idle"
+animation = &"moving"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -286,7 +334,7 @@ position = Vector2(-3, 11)
 shape = SubResource("CapsuleShape2D_pcrc7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShieldArea"]
-modulate = Color(1, 1, 1, 0.392157)
+modulate = Color(0, 0, 0, 0.588235)
 position = Vector2(-3, 11)
 scale = Vector2(1.25, 1)
 sprite_frames = SubResource("SpriteFrames_6p2rv")
@@ -306,9 +354,6 @@ shape = SubResource("CapsuleShape2D_if28d")
 
 [node name="GPUParticles2D" parent="." instance=ExtResource("4_5cftr")]
 position = Vector2(2, -32)
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_qh6gh")
 
 [connection signal="timeout" from="ShieldArea/ShieldCooldown" to="." method="_on_shield_cooldown_timeout"]
 [connection signal="area_entered" from="PlayerArea" to="." method="_on_player_area_entered"]

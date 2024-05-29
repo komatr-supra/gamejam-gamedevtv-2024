@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dg1hplh4vtyyd"]
+[gd_scene load_steps=7 format=3 uid="uid://dg1hplh4vtyyd"]
 
 [ext_resource type="Script" path="res://scenes/new start scene/menu.gd" id="1_rb5ok"]
 [ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_umyxd"]
 [ext_resource type="PackedScene" uid="uid://bjxr0iep468t3" path="res://scenes/falling objects/new_asteroid.tscn" id="4_243y7"]
 [ext_resource type="PackedScene" uid="uid://cn26jqfqdu51d" path="res://scenes/player scene/destruction_particles.tscn" id="5_l4p10"]
+[ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="6_bys3q"]
 [ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://scenes/particles scene/particle_static.tscn" id="6_sosn0"]
 
 [node name="Menu" type="Node"]
@@ -280,5 +281,7 @@ position = Vector2(-223, 79)
 
 [node name="RigidBody2D" parent="." instance=ExtResource("4_243y7")]
 position = Vector2(-220, 310)
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("6_bys3q")]
 
 [connection signal="button_up" from="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/BotMarginContainer/StartButton" to="." method="_on_start_button_up"]
