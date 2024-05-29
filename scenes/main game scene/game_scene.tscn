@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=17 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bjxr0iep468t3" path="res://scenes/falling objects/new_asteroid.tscn" id="2_5md3b"]
@@ -10,9 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="8_s83b5"]
 [ext_resource type="Texture2D" uid="uid://crifue1863v46" path="res://sprites/Health.png" id="8_ts6xn"]
 [ext_resource type="Texture2D" uid="uid://bhey3csoe3sai" path="res://sprites/HealthFull.png" id="9_qp6d4"]
+[ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="10_o8iod"]
 [ext_resource type="PackedScene" uid="uid://dttnoca6h8g41" path="res://scenes/pause_scene/pause_scene.tscn" id="11_dx34h"]
 [ext_resource type="PackedScene" uid="uid://dybnflwyw1dvs" path="res://scenes/victory/victory_screen.tscn" id="12_iggr2"]
+
 [ext_resource type="AudioStream" uid="uid://eyhht1ggaqt" path="res://Bonus/fight.ogg" id="13_p2uwh"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
 size = Vector2(2816, 16)
@@ -117,6 +120,7 @@ texture_progress = ExtResource("9_qp6d4")
 
 [node name="ShipHealthLabel" type="Label" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
 layout_mode = 2
+theme = ExtResource("10_o8iod")
 text = "SHIP HEALTH"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -129,6 +133,7 @@ size_flags_vertical = 3
 [node name="NoFuelRichTextLabel" type="RichTextLabel" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer"]
 visible = false
 layout_mode = 2
+theme = ExtResource("10_o8iod")
 bbcode_enabled = true
 text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img]
 NO FUEL LEFT![/center]"
@@ -147,6 +152,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme = ExtResource("10_o8iod")
 theme_override_font_sizes/font_size = 21
 text = "TIME LEFT"
 horizontal_alignment = 2
@@ -155,6 +161,7 @@ horizontal_alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("10_o8iod")
 horizontal_alignment = 2
 
 [node name="BotMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer"]
@@ -180,6 +187,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme = ExtResource("10_o8iod")
 text = "SHIELD COOLDOWN: "
 
 [node name="RightMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/BotMarginContainer/GridContainer"]

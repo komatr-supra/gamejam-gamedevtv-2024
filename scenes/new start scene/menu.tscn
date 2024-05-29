@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dg1hplh4vtyyd"]
+[gd_scene load_steps=6 format=3 uid="uid://dg1hplh4vtyyd"]
 
 [ext_resource type="Script" path="res://scenes/new start scene/menu.gd" id="1_rb5ok"]
+[ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_umyxd"]
 [ext_resource type="PackedScene" uid="uid://bjxr0iep468t3" path="res://scenes/falling objects/new_asteroid.tscn" id="4_243y7"]
 [ext_resource type="PackedScene" uid="uid://cn26jqfqdu51d" path="res://scenes/player scene/destruction_particles.tscn" id="5_l4p10"]
 [ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://scenes/particles scene/particle_static.tscn" id="6_sosn0"]
@@ -25,6 +26,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="GridContainer/TopMarginContainer/CenterContainer"]
 layout_mode = 2
+theme = ExtResource("2_umyxd")
 text = "GAME NAME"
 
 [node name="BotMarginContainer" type="MarginContainer" parent="GridContainer"]
@@ -58,6 +60,7 @@ layout_mode = 2
 
 [node name="CreditsLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer"]
 layout_mode = 2
+theme = ExtResource("2_umyxd")
 text = "CREDITS:"
 horizontal_alignment = 1
 
@@ -76,12 +79,14 @@ columns = 6
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 text = "Producer: "
 
 [node name="FraserLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProducerCenterContainer/ProducerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 text = "Fraser"
 uri = "https://www.linkedin.com/in/fraser-ibbotson-8b8a2a213/"
 
@@ -100,12 +105,14 @@ columns = 6
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 text = "Programmers: "
 
 [node name="FodsLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2/ProgrammerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 text = "fods"
 uri = "https://fodss.itch.io/"
 
@@ -113,12 +120,14 @@ uri = "https://fodss.itch.io/"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 text = ";"
 
 [node name="KomatrLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2/ProgrammerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 text = "komatr"
 uri = "https://komatr.itch.io/"
 
@@ -126,12 +135,14 @@ uri = "https://komatr.itch.io/"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 text = ";"
 
 [node name="LeviLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2/ProgrammerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 text = "Levi"
 uri = "https://tewecske.itch.io/"
 
@@ -150,12 +161,14 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme = ExtResource("2_umyxd")
 text = "Art: "
 
 [node name="ClayLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ArtCenterContainer/ArtGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+theme = ExtResource("2_umyxd")
 text = "Claytomesh"
 uri = "https://claytomesh.artstation.com/"
 
@@ -174,12 +187,14 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme = ExtResource("2_umyxd")
 text = "Music/SFX: "
 
 [node name="AntonLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/MusicCenterContainer/MusicGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 text = "Antongiulio Giardino"
 uri = "https://soundcloud.com/antongiulio-giardino"
 
@@ -194,6 +209,7 @@ theme_override_constants/margin_bottom = 32
 
 [node name="StartButton" type="Button" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/BotMarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_umyxd")
 text = "START"
 
 [node name="RightMarginContainer" type="MarginContainer" parent="GridContainer/BotMarginContainer/GridContainer"]
@@ -212,6 +228,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
+theme = ExtResource("2_umyxd")
 bbcode_enabled = true
 text = "[center][b]CONTROLS:[/b]
 - A/D TO CONTROL YOUR SHIP'S ROTATION
@@ -235,9 +252,10 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 bbcode_enabled = true
 text = "[center]COLLECT [b]FUEL CANNISTERS[/b]
-TO RESTORE YOUR FUEL
+TO RESTORE FUEL
 
 [img=42x68]res://scenes/fuel/NewFuelBarrel.png[/img][/center]"
 fit_content = true
@@ -246,6 +264,7 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_umyxd")
 bbcode_enabled = true
 text = "[center]COLLECT [b]WRENCH[/b] TO
 REPLENISH YOUR SHIP'S HP

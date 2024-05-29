@@ -33,10 +33,14 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 
 	SystemData.player_fuel = 100
-	SystemData.player_health = 20
+	SystemData.player_health = 15
 	SystemData.time_left = 180
 	SystemData.time_survived = 0
 	SystemData.shield_health = 5
+	SystemData.health_collected = 0
+	SystemData.fuel_collected = 0
+
+	health_progress_bar.max_value = SystemData.player_health + SystemData.shield_health
 
 	asteroid_timer.connect("timeout", _on_FallingObjectTimer_timeout)
 	asteroid_timer.start()
@@ -58,20 +62,21 @@ func _process(delta):
 	if is_player_alive:
 		if fall_delay > 0.1:
 			fall_delay -= 0.00001
-		SystemData.time_survived += delta
-		SystemData.time_left -= delta
-		timer_label.text = time_passed
+		if !game_end:
+			SystemData.time_survived += delta
+			SystemData.time_left -= delta
+			timer_label.text = time_passed
 
 		if SystemData.time_survived >= SystemData.max_time && !game_end:
 			game_win()
 			game_end = true
 
-	health_progress_bar.value = SystemData.player_health
+	health_progress_bar.value = SystemData.player_health + SystemData.shield_health
 
 	if SystemData.player_fuel <= 25 && !sent_fuel_signal:
 		low_fuel_signal.emit()
 
-	if !player_has_shield && is_player_alive:
+	if !player_has_shield && is_player_alive && !game_end:
 		shield_cooldown_label.text = "SHIELD COOLDOWN: " + str(snappedf(player.shield_cooldown_timer.time_left, 0.1))
 
 func _input(event):
@@ -107,10 +112,12 @@ func on_player_hit():
 			player.player_die()
 
 func game_win():
-	victory_screen.show()
+	victory_screen.game_win()
 	player.queue_free()
 
 func no_fuel():
+	no_fuel_blink_timer.start(0.5)
+
 	if SystemData.player_fuel > 25:
 		sent_fuel_signal = false
 
@@ -126,8 +133,6 @@ func no_fuel():
 			no_fuel_rich_text_label.visible = false
 		else:
 			no_fuel_rich_text_label.visible = true
-
-	no_fuel_blink_timer.start(0.5)
 
 	if !is_player_alive:
 		no_fuel_rich_text_label.visible = false

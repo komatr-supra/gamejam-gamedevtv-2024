@@ -145,9 +145,9 @@ mix_target = 2
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="destroy"]
-[connection signal="area_entered" from="LargeAsteroid/Area2D" to="." method="_on_body_entered"]
 [connection signal="area_entered" from="LargeAsteroid/Area2D" to="." method="_on_area_entered"]
-[connection signal="area_entered" from="MediumAsteroid/Area2D" to="." method="_on_body_entered"]
+[connection signal="area_entered" from="LargeAsteroid/Area2D" to="." method="_on_body_entered"]
 [connection signal="area_entered" from="MediumAsteroid/Area2D" to="." method="_on_area_entered"]
-[connection signal="area_entered" from="SmallAsteroid/Area2D" to="." method="_on_body_entered"]
+[connection signal="area_entered" from="MediumAsteroid/Area2D" to="." method="_on_body_entered"]
 [connection signal="area_entered" from="SmallAsteroid/Area2D" to="." method="_on_area_entered"]
+[connection signal="area_entered" from="SmallAsteroid/Area2D" to="." method="_on_body_entered"]

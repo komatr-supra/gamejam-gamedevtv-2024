@@ -7,7 +7,12 @@ var time_survived = 0
 var player_fuel: float = 100
 
 var collision_cost: int = 1
-var player_health: int = 20
+
+var max_player_health: int = 15
+var player_health: int = 15
 
 var shield_health: int = 5
 var shield_cooldown: int = 20
+
+var health_collected: int = 0
+var fuel_collected: int = 0

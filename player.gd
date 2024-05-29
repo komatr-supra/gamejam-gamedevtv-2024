@@ -10,7 +10,7 @@ extends RigidBody2D
 @export var thrust_power = 180
 @export var max_linear_speed = 145
 @export var power: float = 100
-@export var thrust_cost: float = 0.1
+@export var thrust_cost: float = 0.05
 @export var collision_cost: int = 1
 @export var death_particles: PackedScene
 

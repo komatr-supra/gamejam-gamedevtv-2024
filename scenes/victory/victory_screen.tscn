@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dybnflwyw1dvs"]
+[gd_scene load_steps=3 format=3 uid="uid://dybnflwyw1dvs"]
 
 [ext_resource type="Script" path="res://scenes/victory/victory_screen.gd" id="1_hlxxj"]
+[ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_htutr"]
 
 [node name="VictoryScreen" type="Control"]
 layout_mode = 3
@@ -30,7 +31,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 27
+theme = ExtResource("2_htutr")
+theme_override_font_sizes/font_size = 26
 text = "CONGRATULATIONS, CAPTAIN!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -39,18 +41,43 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 27
+theme = ExtResource("2_htutr")
+theme_override_font_sizes/font_size = 26
 text = "YOU SAVED THE CREW"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/GridContainer"]
+[node name="PickupsGridContainer" type="GridContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="LeftRichTextLabel" type="RichTextLabel" parent="MarginContainer/GridContainer/PickupsGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_htutr")
+bbcode_enabled = true
+text = "[center][img=42x68]res://scenes/fuel/NewFuelBarrel.png[/img] X COLLECTED[/center]"
+fit_content = true
+
+[node name="RightRichTextLabel" type="RichTextLabel" parent="MarginContainer/GridContainer/PickupsGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_htutr")
+bbcode_enabled = true
+text = "[center][img=51x61]res://scenes/health/NewWrench.png[/img] X COLLECTED[/center]"
+fit_content = true
+
+[node name="ButtonsGridContainer" type="GridContainer" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="LeftMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer/GridContainer"]
+[node name="LeftMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer/ButtonsGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -59,17 +86,20 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="TryAgainButton" type="Button" parent="MarginContainer/GridContainer/GridContainer/LeftMarginContainer"]
+[node name="TryAgainButton" type="Button" parent="MarginContainer/GridContainer/ButtonsGridContainer/LeftMarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_htutr")
 text = "TRY AGAIN"
 
-[node name="EmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer/GridContainer"]
+[node name="EmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer/ButtonsGridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="RightMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer/GridContainer"]
+[node name="RightMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer/ButtonsGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -78,15 +108,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="MenuButton" type="Button" parent="MarginContainer/GridContainer/GridContainer/RightMarginContainer"]
+[node name="MenuButton" type="Button" parent="MarginContainer/GridContainer/ButtonsGridContainer/RightMarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_htutr")
 text = "RETURN
 TO MENU"
 
-[node name="BotEmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[connection signal="button_up" from="MarginContainer/GridContainer/GridContainer/LeftMarginContainer/TryAgainButton" to="." method="_on_try_again_button_up"]
-[connection signal="button_up" from="MarginContainer/GridContainer/GridContainer/RightMarginContainer/MenuButton" to="." method="_on_menu_button_up"]
+[connection signal="button_up" from="MarginContainer/GridContainer/ButtonsGridContainer/LeftMarginContainer/TryAgainButton" to="." method="_on_try_again_button_up"]
+[connection signal="button_up" from="MarginContainer/GridContainer/ButtonsGridContainer/RightMarginContainer/MenuButton" to="." method="_on_menu_button_up"]
