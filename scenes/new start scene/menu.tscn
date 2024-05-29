@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dg1hplh4vtyyd"]
+[gd_scene load_steps=5 format=3 uid="uid://dg1hplh4vtyyd"]
 
 [ext_resource type="Script" path="res://scenes/new start scene/menu.gd" id="1_rb5ok"]
-[ext_resource type="Texture2D" uid="uid://c6o2s1kjscxry" path="res://scenes/fuel/FuelBarrel.png" id="2_n0i4d"]
-[ext_resource type="Texture2D" uid="uid://ccs11ftq1so1k" path="res://scenes/health/Wrench.png" id="3_gncvv"]
 [ext_resource type="PackedScene" uid="uid://bgfln8h2uvikk" path="res://scenes/falling objects/falling_object.tscn" id="4_kshj4"]
 [ext_resource type="PackedScene" uid="uid://cn26jqfqdu51d" path="res://scenes/player scene/destruction_particles.tscn" id="5_l4p10"]
 [ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://scenes/particles scene/particle_static.tscn" id="6_sosn0"]
@@ -42,12 +40,135 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 128
-theme_override_constants/margin_top = 96
-theme_override_constants/margin_right = 128
-theme_override_constants/margin_bottom = 96
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
 
-[node name="StartButton" type="Button" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer"]
+layout_mode = 2
+
+[node name="TopMarginContainer" type="MarginContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer"]
+layout_mode = 2
+
+[node name="CreditsLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer"]
+layout_mode = 2
+text = "CREDITS:"
+horizontal_alignment = 1
+
+[node name="ProgrammerCenterContainer" type="CenterContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ProgrammerGridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 6
+
+[node name="ProgrammerLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Programmers: "
+
+[node name="FodsLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "fods"
+uri = "https://fodss.itch.io/"
+
+[node name="CommaLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = ";"
+
+[node name="KomatrLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "komatr"
+uri = "https://komatr.itch.io/"
+
+[node name="CommaLabel2" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = ";"
+
+[node name="LeviLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Levi"
+uri = "https://www.google.com/"
+
+[node name="ArtCenterContainer" type="CenterContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ArtGridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ArtCenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="ArtLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ArtCenterContainer/ArtGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Art: "
+
+[node name="ClayLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ArtCenterContainer/ArtGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Claytomesh"
+uri = "https://claytomesh.artstation.com/"
+
+[node name="MusicCenterContainer" type="CenterContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MusicGridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/MusicCenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/MusicCenterContainer/MusicGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Music/SFX: "
+
+[node name="AntonLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/MusicCenterContainer/MusicGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Antongiulio Giardino"
+uri = "https://soundcloud.com/antongiulio-giardino"
+
+[node name="BotMarginContainer" type="MarginContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 32
+
+[node name="StartButton" type="Button" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/BotMarginContainer"]
 layout_mode = 2
 text = "START"
 
@@ -63,93 +184,50 @@ theme_override_constants/margin_bottom = 32
 [node name="GridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "HOW TO PLAY:"
-horizontal_alignment = 1
-vertical_alignment = 1
+size_flags_vertical = 8
+bbcode_enabled = true
+text = "[center][b]CONTROLS:[/b]
+- A/D TO CONTROL YOUR SHIP'S ROTATION
+- SPACEBAR TO ACTIVATE BOOST
+- ESC TO PAUSE
 
-[node name="EmptyMarginContainer" type="MarginContainer" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_bottom = 16
+[b]HOW TO PLAY:[/b]
+- AVOID ASTEROIDS
+- SURVIVE FOR 3 MINUTES
 
-[node name="Label2" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "- A/D TO CONTROL YOUR SHIP'S ROTATION"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "- SPACEBAR TO ACTIVATE BOOST"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label4" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "- AVOID ASTEROIDS"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label5" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "- SURVIVE FOR 5 MINUTES"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EmptyMarginContainer2" type="MarginContainer" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_bottom = 8
+[/center]"
+fit_content = true
 
 [node name="GridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 4
 columns = 2
 
-[node name="LeftLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer/GridContainer"]
+[node name="LeftRichTextLabel" type="RichTextLabel" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "COLLECT FUEL CANNISTERS
-TO RESTORE YOUR FUEL"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[center]COLLECT [b]FUEL CANNISTERS[/b]
+TO RESTORE YOUR FUEL
 
-[node name="RightLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer/GridContainer"]
+[img=42x68]res://scenes/fuel/NewFuelBarrel.png[/img][/center]"
+fit_content = true
+
+[node name="RightRichTextLabel" type="RichTextLabel" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "COLLECT WRENCH TO
+bbcode_enabled = true
+text = "[center]COLLECT [b]WRENCH[/b] TO
 REPLENISH YOUR SHIP'S HP
-"
-horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("2_n0i4d")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="TextureRect2" type="TextureRect" parent="GridContainer/BotMarginContainer/GridContainer/RightMarginContainer/GridContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("3_gncvv")
-expand_mode = 3
-stretch_mode = 5
+[img=51x61]res://scenes/health/NewWrench.png[/img][/center]"
+fit_content = true
 
 [node name="RigidBody2D" parent="." instance=ExtResource("4_kshj4")]
 position = Vector2(-294, 320)
@@ -160,4 +238,4 @@ position = Vector2(-216, 152)
 [node name="Node2D" parent="." instance=ExtResource("6_sosn0")]
 position = Vector2(-223, 79)
 
-[connection signal="button_up" from="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/StartButton" to="." method="_on_start_button_up"]
+[connection signal="button_up" from="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/BotMarginContainer/StartButton" to="." method="_on_start_button_up"]

@@ -1,10 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdcsnat8226eu"]
+[gd_scene load_steps=9 format=3 uid="uid://bdcsnat8226eu"]
 
 [ext_resource type="Script" path="res://scenes/game background parallax/background.gd" id="1_sgyub"]
 [ext_resource type="Script" path="res://scenes/game background parallax/bg_texture.gd" id="2_4yt02"]
-[ext_resource type="Script" path="res://scenes/game background parallax/OptionButton.gd" id="3_qj3ji"]
-[ext_resource type="Script" path="res://scenes/game background parallax/OptionButton2.gd" id="4_2llfo"]
-[ext_resource type="Resource" uid="uid://bor1ww2su4ody" path="res://resources/colors.tres" id="4_3yo2x"]
 
 [sub_resource type="Gradient" id="Gradient_jwyjb"]
 interpolation_mode = 1
@@ -90,17 +87,12 @@ offset_left = 1062.0
 offset_top = 25.0
 offset_right = 1274.0
 offset_bottom = 60.0
-script = ExtResource("3_qj3ji")
-colors = ExtResource("4_3yo2x")
 
 [node name="OptionButton2" type="OptionButton" parent="CanvasLayer"]
 offset_left = 1062.0
 offset_top = 82.0
 offset_right = 1274.0
 offset_bottom = 117.0
-script = ExtResource("4_2llfo")
 
 [connection signal="item_selected" from="CanvasLayer/OptionButton1" to="CanvasLayer/OptionButton1" method="_on_item_selected"]
-[connection signal="option_color_changed" from="CanvasLayer/OptionButton1" to="BGLayer1/BGTexture1" method="_on_option_button_1_option_color_changed"]
 [connection signal="item_selected" from="CanvasLayer/OptionButton2" to="CanvasLayer/OptionButton2" method="_on_item_selected"]
-[connection signal="option_color_changed" from="CanvasLayer/OptionButton2" to="BGLayer1/BGTexture1" method="_on_option_button_2_option_color_changed"]

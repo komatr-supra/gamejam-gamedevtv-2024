@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bgc80trpx15l8"
+path="res://.godot/imported/Asteroids Impact-01.wav-ae5db5df70d15182eed5b53d2e0f651a.sample"
+
+[deps]
+
+source_file="res://Sounds/Asteroids Impact-01.wav"
+dest_files=["res://.godot/imported/Asteroids Impact-01.wav-ae5db5df70d15182eed5b53d2e0f651a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -20,7 +20,6 @@ var thrust_enabled = false
 
 signal player_data_signal(velocity: Vector2, position: Vector2)
 signal player_death_signal
-signal no_fuel_signal
 
 func _ready():
 	fuel_bar.value = SystemData.player_fuel
