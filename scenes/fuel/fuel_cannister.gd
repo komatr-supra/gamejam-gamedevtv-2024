@@ -1,7 +1,8 @@
 extends Area2D
-#
+
 #func _ready():
-	#get_parent().fuel_exists = true
+	#if get_parent().fuel_timer.time_left <= 0:
+		#get_parent().fuel_timer.start(5)
 
 func _process(delta):
 	position.y += 200 * delta
@@ -13,6 +14,7 @@ func _on_area_entered(area):
 		else:
 			SystemData.player_fuel = 100
 		get_parent().fuel_timer.start(5)
+		SystemData.fuel_collected += 1
 		self.queue_free()
 
 	if area.is_in_group("delete_object"):

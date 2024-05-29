@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dttnoca6h8g41"]
+[gd_scene load_steps=3 format=3 uid="uid://dttnoca6h8g41"]
 
 [ext_resource type="Script" path="res://scenes/pause_scene/pause_scene.gd" id="1_45e5e"]
+[ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_0kn1h"]
 
 [node name="PauseScene" type="Control"]
 process_mode = 2
@@ -36,7 +37,8 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 27
+theme = ExtResource("2_0kn1h")
+theme_override_font_sizes/font_size = 26
 text = "PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -58,13 +60,16 @@ theme_override_constants/margin_bottom = 8
 
 [node name="ResumeButton" type="Button" parent="MarginContainer/GridContainer/GridContainer/LeftMarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_0kn1h")
 text = "RESUME
 "
 
 [node name="EmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="RightMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer/GridContainer"]
@@ -78,6 +83,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="MenuButton" type="Button" parent="MarginContainer/GridContainer/GridContainer/RightMarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_0kn1h")
 text = "RETURN
 TO MENU"
 

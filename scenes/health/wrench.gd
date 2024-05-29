@@ -9,11 +9,12 @@ func _process(delta):
 
 func _on_area_entered(area):
 	if area.is_in_group("player"):
-		if SystemData.player_health <= 18:
+		if SystemData.player_health <= SystemData.max_player_health - 2:
 			SystemData.player_health += 2
 		else:
-			SystemData.player_health = 20
+			SystemData.player_health = SystemData.max_player_health
 		get_parent().health_timer.start(3)
+		SystemData.health_collected += 1
 		self.queue_free()
 
 	if area.is_in_group("delete_object"):

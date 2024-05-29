@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfwuwbvcku5yf"]
+[gd_scene load_steps=3 format=3 uid="uid://bfwuwbvcku5yf"]
 
 [ext_resource type="Script" path="res://scenes/slideshow/intro.gd" id="1_vkdyc"]
+[ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_gd4to"]
 
 [node name="Intro" type="Node"]
 script = ExtResource("1_vkdyc")
@@ -27,6 +28,7 @@ size_flags_vertical = 3
 [node name="MainLabel" type="Label" parent="MarginContainer/GridContainer/TopMarginContainer"]
 layout_mode = 2
 size_flags_vertical = 1
+theme = ExtResource("2_gd4to")
 text = "Captain's Log, Stardate 4723.5
 
 We are currently navigating an asteroid-heavy region. The density and unpredictability of these celestial bodies pose a significant threat to our vessel.
@@ -44,6 +46,7 @@ size_flags_vertical = 8
 
 [node name="FooterLabel" type="Label" parent="MarginContainer/GridContainer/FooterMarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_gd4to")
 text = "Press SPACEBAR to skip"
 horizontal_alignment = 1
 vertical_alignment = 1
