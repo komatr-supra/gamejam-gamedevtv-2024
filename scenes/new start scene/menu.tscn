@@ -61,50 +61,74 @@ layout_mode = 2
 text = "CREDITS:"
 horizontal_alignment = 1
 
-[node name="ProgrammerCenterContainer" type="CenterContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer"]
+[node name="ProducerCenterContainer" type="CenterContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ProgrammerGridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer"]
+[node name="ProducerGridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProducerCenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 6
 
-[node name="ProgrammerLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+[node name="ProducerLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProducerCenterContainer/ProducerGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Producer: "
+
+[node name="FraserLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProducerCenterContainer/ProducerGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Fraser"
+uri = "https://www.linkedin.com/in/fraser-ibbotson-8b8a2a213/"
+
+[node name="ProgrammerCenterContainer2" type="CenterContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ProgrammerGridContainer" type="GridContainer" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 6
+
+[node name="ProgrammerLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2/ProgrammerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "Programmers: "
 
-[node name="FodsLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+[node name="FodsLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2/ProgrammerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "fods"
 uri = "https://fodss.itch.io/"
 
-[node name="CommaLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+[node name="CommaLabel" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2/ProgrammerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = ";"
 
-[node name="KomatrLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+[node name="KomatrLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2/ProgrammerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "komatr"
 uri = "https://komatr.itch.io/"
 
-[node name="CommaLabel2" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+[node name="CommaLabel2" type="Label" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2/ProgrammerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = ";"
 
-[node name="LeviLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer/ProgrammerGridContainer"]
+[node name="LeviLinkButton" type="LinkButton" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/TopMarginContainer/GridContainer/ProgrammerCenterContainer2/ProgrammerGridContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3

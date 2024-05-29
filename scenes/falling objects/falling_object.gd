@@ -15,8 +15,12 @@ extends RigidBody2D
 @onready var large_asteroid_area = $LargeAsteroid/Area2D/CollisionShape2D
 @onready var large_collision_shape = $LargeCollisionShape2D
 
+@onready var audio_player = $AudioStreamPlayer
+
 var speed_increase = 0
 var asteroid_size: int # 0 = SMALL / 1 = MEDIUM / 2 = LARGE
+var current_asteroid
+var current_collision
 
 signal player_hit_signal
 
@@ -32,6 +36,8 @@ func _ready():
 		small_collision_shape.rotation_degrees = small_asteroid.rotation_degrees
 		small_asteroid_area.disabled = false
 		small_collision_shape.disabled = false
+		current_asteroid = small_asteroid
+		current_collision = small_collision_shape
 		mass = randf_range(0.10, 0.15)
 
 	elif asteroid_size == 1:
@@ -40,6 +46,8 @@ func _ready():
 		medium_collision_shape.rotation_degrees = medium_asteroid.rotation_degrees 
 		medium_asteroid_area.disabled = false
 		medium_collision_shape.disabled = false
+		current_asteroid = medium_asteroid
+		current_collision = medium_collision_shape
 		mass = randf_range(0.15, 0.2)
 
 	elif asteroid_size == 2:
@@ -48,6 +56,8 @@ func _ready():
 		large_collision_shape.rotation_degrees = large_asteroid.rotation_degrees
 		large_asteroid_area.disabled = false
 		large_collision_shape.disabled = false
+		current_asteroid = large_asteroid
+		current_collision = large_collision_shape
 		mass = randf_range(0.2, 0.25)
 	
 	#var x = randf_range(0.1, 0.25)
@@ -74,6 +84,10 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		player_hit_signal.emit()
 		particles_create()
+		audio_player.playing = true
+		current_asteroid.queue_free()
+		current_collision.queue_free()
+		await audio_player.finished
 		self.queue_free()
 
 func _on_area_entered(area):
@@ -83,4 +97,8 @@ func _on_area_entered(area):
 	if area.is_in_group("shield"):
 		player_hit_signal.emit()
 		particles_create()
+		audio_player.playing = true
+		current_asteroid.queue_free()
+		current_collision.queue_free()
+		await audio_player.finished
 		self.queue_free()
