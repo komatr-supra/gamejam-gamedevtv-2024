@@ -23,7 +23,6 @@ script = ExtResource("1_3072i")
 falling_object_scene = ExtResource("2_5md3b")
 fuel_collect_scene = ExtResource("3_glgdl")
 health_collect_scene = ExtResource("4_htyl0")
-fall_delay = 0.35
 
 [node name="DeleteObjectArea" type="Area2D" parent="." groups=["delete_object"]]
 position = Vector2(640, 1832)
