@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://sbenj0qdg1bj"]
+[gd_scene load_steps=42 format=3 uid="uid://sbenj0qdg1bj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_eiakb"]
 [ext_resource type="Texture2D" uid="uid://c7khvyhkwvpss" path="res://sprites/FuelEmpty.png" id="1_l8oj6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cubx6rk4o265q" path="res://sprites/Timeline 1_0000-sheet.png" id="3_kefhh"]
 [ext_resource type="PackedScene" uid="uid://cn26jqfqdu51d" path="res://scenes/player scene/destruction_particles.tscn" id="4_5cftr"]
 [ext_resource type="Texture2D" uid="uid://cx0wg8qiqw1d8" path="res://sprites/ShieldPlaceholder.png" id="5_g5tb8"]
+[ext_resource type="Script" path="res://scenes/player scene/off_screen_indicator.gd" id="7_5eown"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nqwd3"]
 atlas = ExtResource("3_kefhh")
@@ -299,6 +300,10 @@ animations = [{
 radius = 66.0
 height = 436.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bblw3"]
+atlas = ExtResource("3_kefhh")
+region = Rect2(0, 0, 400, 600)
+
 [node name="Player" type="RigidBody2D" groups=["player"]]
 script = ExtResource("1_eiakb")
 
@@ -356,6 +361,33 @@ shape = SubResource("CapsuleShape2D_if28d")
 [node name="GPUParticles2D" parent="." instance=ExtResource("4_5cftr")]
 position = Vector2(2, -32)
 
+[node name="OffScreenIndicator" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+scale = Vector2(0.1, 0.1)
+script = ExtResource("7_5eown")
+
+[node name="Indicator" type="TextureRect" parent="OffScreenIndicator"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -300.0
+offset_right = 200.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 300)
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_bblw3")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="OffScreenIndicator"]
+position = Vector2(-4.99998, -12.5)
+scale = Vector2(14.5, 43.75)
+
 [connection signal="timeout" from="ShieldArea/ShieldCooldown" to="." method="_on_shield_cooldown_timeout"]
 [connection signal="area_entered" from="PlayerArea" to="." method="_on_player_area_entered"]
 [connection signal="body_entered" from="PlayerArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_entered" from="OffScreenIndicator/VisibleOnScreenNotifier2D" to="OffScreenIndicator" method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="OffScreenIndicator/VisibleOnScreenNotifier2D" to="OffScreenIndicator" method="_on_visible_on_screen_notifier_2d_screen_exited"]
