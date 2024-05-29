@@ -3,7 +3,7 @@ extends Node2D
 @export var falling_object_scene : PackedScene
 @export var fuel_collect_scene: PackedScene
 @export var health_collect_scene: PackedScene
-@export var fall_delay = 0.5
+@export var fall_delay = 0.8
 
 @onready var asteroid_timer = $AsteroidTimer
 @onready var fuel_timer = $FuelTimer
@@ -65,7 +65,7 @@ func _process(delta):
 	var mins = fmod(SystemData.time_left, 60 * 60) / 60
 	var time_passed = "%02d:%02d:%02d" % [mins, secs, mils]
 	if is_player_alive:
-		if fall_delay > 0.1:
+		if fall_delay > 0.3:
 			fall_delay -= 0.00001
 		if !game_end:
 			SystemData.time_survived += delta

@@ -316,18 +316,19 @@ texture_progress = ExtResource("2_ltdy0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 0.0698132
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_4uo1t")
 animation = &"moving"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -24)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 shape = SubResource("CapsuleShape2D_u25fl")
 
 [node name="ShieldArea" type="Area2D" parent="." groups=["shield"]]
 position = Vector2(0, -24)
+scale = Vector2(0.8, 0.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldArea"]
 position = Vector2(-3, 11)
@@ -347,7 +348,7 @@ one_shot = true
 
 [node name="PlayerArea" type="Area2D" parent="." groups=["player"]]
 position = Vector2(0, -24)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea"]
 shape = SubResource("CapsuleShape2D_if28d")
