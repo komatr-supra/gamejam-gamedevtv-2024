@@ -85,8 +85,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u25fl"]
-radius = 64.0
-height = 432.0
+radius = 62.5
+height = 430.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pcrc7"]
 radius = 80.0
@@ -332,6 +332,7 @@ scale = Vector2(0.4, 0.4)
 shape = SubResource("CapsuleShape2D_u25fl")
 
 [node name="ShieldArea" type="Area2D" parent="." groups=["shield"]]
+visible = false
 position = Vector2(0, -24)
 scale = Vector2(0.8, 0.8)
 

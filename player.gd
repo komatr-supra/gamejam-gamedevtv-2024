@@ -85,13 +85,13 @@ func _on_body_entered(body):
 			#player_die()
 
 func destroy_shield():
-	shield_destroyed_signal.emit()
 	shield_collision.disabled = true
 	shield_sprite.visible = false
+	shield_destroyed_signal.emit()
 	shield_cooldown_timer.start(SystemData.shield_cooldown)
 
 func _on_shield_cooldown_timeout():
-	SystemData.shield_health = 5
+	SystemData.shield_health = SystemData.shield_max_health
 	shield_destroyed_signal.emit()
 	shield_collision.disabled = false
 	shield_sprite.visible = true

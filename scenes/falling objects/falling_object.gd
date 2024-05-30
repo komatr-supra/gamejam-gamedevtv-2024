@@ -32,7 +32,6 @@ func _ready():
 	
 	match asteroid_size:
 		0:
-			print("small")
 			small_asteroid.visible = true
 			small_asteroid.rotation_degrees = randi_range(0, 180)
 			small_collision_shape.rotation_degrees = small_asteroid.rotation_degrees
@@ -42,7 +41,6 @@ func _ready():
 			current_collision = small_collision_shape
 			mass = randf_range(0.10, 0.15)
 		1:
-			print("medium")
 			medium_asteroid.visible = true
 			medium_asteroid.rotation_degrees = randi_range(0, 180)
 			medium_collision_shape.rotation_degrees = medium_asteroid.rotation_degrees 
@@ -52,7 +50,6 @@ func _ready():
 			current_collision = medium_collision_shape
 			mass = randf_range(0.15, 0.2)
 		2:
-			print("large")
 			large_asteroid.visible = true
 			large_asteroid.rotation_degrees = randi_range(0, 180)
 			large_collision_shape.rotation_degrees = large_asteroid.rotation_degrees

@@ -21,6 +21,7 @@ extends Node2D
 
 @onready var outside_grid_container = $GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer
 @onready var outside_countdown_label = $GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/CountdownLabel
+@onready var fuel_progress_bar = $GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/MarginContainer/CenterContainer/GridContainer/FuelProgressBar
 
 
 
@@ -35,17 +36,19 @@ signal low_fuel_signal
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_PAUSABLE
+	
+	fuel_progress_bar.scale = Vector2(0.5, 0.5)
 
-	SystemData.player_fuel = 100
-	SystemData.player_health = 15
-	SystemData.time_left = 180
+	SystemData.player_fuel = SystemData.player_max_fuel
+	SystemData.player_health = SystemData.player_max_health
+	SystemData.time_left = SystemData.max_time
 	SystemData.time_survived = 0
-	SystemData.shield_health = 5
+	SystemData.shield_health = SystemData.shield_max_health
 	SystemData.health_collected = 0
 	SystemData.fuel_collected = 0
 	SystemData.time_outside_screen = 10
 
-	health_progress_bar.max_value = SystemData.player_health + SystemData.shield_health
+	health_progress_bar.max_value = SystemData.player_health
 
 	asteroid_timer.connect("timeout", _on_FallingObjectTimer_timeout)
 	asteroid_timer.start()
@@ -77,6 +80,7 @@ func _process(delta):
 			game_end = true
 
 	health_progress_bar.value = SystemData.player_health + SystemData.shield_health
+	fuel_progress_bar.value = SystemData.player_fuel
 
 	if SystemData.player_fuel <= 25 && !sent_fuel_signal:
 		low_fuel_signal.emit()
@@ -92,6 +96,9 @@ func _process(delta):
 		elif SystemData.time_outside_screen <= 0:
 			outside_grid_container.visible = false
 			player.player_die()
+	
+	else:
+		outside_grid_container.visible = false
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -116,10 +123,10 @@ func _on_HealthTimer_timeout():
 	health_object.position = Vector2(randi_range(16, (get_viewport_rect().size.x * 2) - 16), falling_object_area.global_position.y)
 
 func on_player_hit():
+	#if SystemData.shield_health > 0:
 	if SystemData.shield_health > 0:
 		SystemData.shield_health -= SystemData.collision_cost
-		if SystemData.shield_health <= 0:
-			player.destroy_shield()
+		player.call_deferred("destroy_shield")
 	else:
 		SystemData.player_health -= SystemData.collision_cost
 		if SystemData.player_health <= 0:

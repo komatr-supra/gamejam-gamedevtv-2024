@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=19 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bjxr0iep468t3" path="res://scenes/falling objects/new_asteroid.tscn" id="2_5md3b"]
@@ -11,8 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://crifue1863v46" path="res://sprites/Health.png" id="8_ts6xn"]
 [ext_resource type="Texture2D" uid="uid://bhey3csoe3sai" path="res://sprites/HealthFull.png" id="9_qp6d4"]
 [ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="10_o8iod"]
+[ext_resource type="Texture2D" uid="uid://day465mhw51rw" path="res://sprites/HealthBGSmall.png" id="11_7r5ae"]
 [ext_resource type="PackedScene" uid="uid://dttnoca6h8g41" path="res://scenes/pause_scene/pause_scene.tscn" id="11_dx34h"]
+[ext_resource type="Texture2D" uid="uid://2jvhtkrj5gp4" path="res://sprites/HealthSmall.png" id="12_f03hg"]
 [ext_resource type="PackedScene" uid="uid://dybnflwyw1dvs" path="res://scenes/victory/victory_screen.tscn" id="12_iggr2"]
+[ext_resource type="Texture2D" uid="uid://bj5o1k0emoxc0" path="res://sprites/HealthFullSmall.png" id="13_0gtrb"]
 [ext_resource type="AudioStream" uid="uid://eyhht1ggaqt" path="res://Bonus/fight.ogg" id="13_p2uwh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
@@ -150,6 +153,83 @@ size_flags_vertical = 3
 theme = ExtResource("10_o8iod")
 horizontal_alignment = 2
 
+[node name="MidMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="GUILayer/MainGUIContainer/MidMarginContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="LeftEmptyMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="OutsideGridContainer" type="GridContainer" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+bbcode_enabled = true
+text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img][/center]"
+fit_content = true
+
+[node name="Label" type="Label" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("10_o8iod")
+text = "SPEED UP!"
+horizontal_alignment = 1
+
+[node name="CountdownLabel" type="Label" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("10_o8iod")
+text = "5"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/MarginContainer/CenterContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/MarginContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "FUEL:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="FuelProgressBar" type="TextureProgressBar" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/MarginContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+value = 100.0
+texture_under = ExtResource("11_7r5ae")
+texture_over = ExtResource("12_f03hg")
+texture_progress = ExtResource("13_0gtrb")
+
+[node name="RightEmptyMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="BotMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -182,6 +262,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="EndScene" parent="GUILayer" instance=ExtResource("6_itygd")]
+visible = false
 z_as_relative = false
 
 [node name="PauseScene" parent="GUILayer" instance=ExtResource("11_dx34h")]
@@ -195,4 +276,6 @@ stream = ExtResource("13_p2uwh")
 volume_db = -10.0
 autoplay = true
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_viewport_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_viewport_area_exited"]
 [connection signal="timeout" from="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer/NoFuelBlinkTimer" to="." method="no_fuel"]
