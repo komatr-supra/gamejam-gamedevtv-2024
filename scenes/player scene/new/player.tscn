@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://sbenj0qdg1bj"]
+[gd_scene load_steps=47 format=3 uid="uid://sbenj0qdg1bj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_eiakb"]
 [ext_resource type="Texture2D" uid="uid://c7khvyhkwvpss" path="res://sprites/FuelEmpty.png" id="1_l8oj6"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cn26jqfqdu51d" path="res://scenes/player scene/destruction_particles.tscn" id="4_5cftr"]
 [ext_resource type="Texture2D" uid="uid://cx0wg8qiqw1d8" path="res://sprites/ShieldPlaceholder.png" id="5_g5tb8"]
 [ext_resource type="Script" path="res://scenes/player scene/off_screen_indicator.gd" id="7_5eown"]
+[ext_resource type="AudioStream" uid="uid://pl81vctuetug" path="res://Sounds/Explosion_1.wav" id="8_xfoyv"]
+[ext_resource type="AudioStream" uid="uid://du3l1dctsdifg" path="res://Sounds/Explosion_2.wav" id="9_j6fl7"]
+[ext_resource type="AudioStream" uid="uid://bxaiay1gy7op3" path="res://Sounds/Explosion_3.wav" id="10_1bl3s"]
+[ext_resource type="AudioStream" uid="uid://cxc7a8sr406xd" path="res://Sounds/Gas.wav" id="11_eedor"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nqwd3"]
 atlas = ExtResource("3_kefhh")
@@ -304,6 +308,15 @@ height = 436.0
 atlas = ExtResource("3_kefhh")
 region = Rect2(0, 0, 400, 600)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_w40r0"]
+streams_count = 3
+stream_0/stream = ExtResource("8_xfoyv")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("9_j6fl7")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("10_1bl3s")
+stream_2/weight = 1.0
+
 [node name="Player" type="RigidBody2D" groups=["player"]]
 script = ExtResource("1_eiakb")
 
@@ -332,7 +345,6 @@ scale = Vector2(0.4, 0.4)
 shape = SubResource("CapsuleShape2D_u25fl")
 
 [node name="ShieldArea" type="Area2D" parent="." groups=["shield"]]
-visible = false
 position = Vector2(0, -24)
 scale = Vector2(0.8, 0.8)
 
@@ -351,6 +363,14 @@ frame_progress = 0.794537
 [node name="ShieldCooldown" type="Timer" parent="ShieldArea"]
 wait_time = 10.0
 one_shot = true
+
+[node name="AudioShieldOn" type="AudioStreamPlayer" parent="ShieldArea"]
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="AudioShieldOff" type="AudioStreamPlayer" parent="ShieldArea"]
+volume_db = -10.0
+bus = &"SFX"
 
 [node name="PlayerArea" type="Area2D" parent="." groups=["player"]]
 position = Vector2(0, -24)
@@ -386,6 +406,16 @@ texture = SubResource("AtlasTexture_bblw3")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="OffScreenIndicator"]
 position = Vector2(-4.99998, -12.5)
 scale = Vector2(14.5, 43.75)
+
+[node name="AudioExplosion" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_w40r0")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="AudioGas" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_eedor")
+volume_db = -10.0
+bus = &"SFX"
 
 [connection signal="timeout" from="ShieldArea/ShieldCooldown" to="." method="_on_shield_cooldown_timeout"]
 [connection signal="area_entered" from="PlayerArea" to="." method="_on_player_area_entered"]
