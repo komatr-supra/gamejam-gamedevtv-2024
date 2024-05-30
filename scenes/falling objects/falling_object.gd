@@ -30,36 +30,36 @@ func _ready():
 	
 	asteroid_size = randi_range(0, 2)
 	
-	if asteroid_size == 0:
-		small_asteroid.visible = true
-		small_asteroid.rotation_degrees = randi_range(0, 180)
-		small_collision_shape.rotation_degrees = small_asteroid.rotation_degrees
-		small_asteroid_area.disabled = false
-		small_collision_shape.disabled = false
-		current_asteroid = small_asteroid
-		current_collision = small_collision_shape
-		mass = randf_range(0.10, 0.15)
+	match asteroid_size:
+		0:
+			small_asteroid.visible = true
+			small_asteroid.rotation_degrees = randi_range(0, 180)
+			small_collision_shape.rotation_degrees = small_asteroid.rotation_degrees
+			small_asteroid_area.disabled = false
+			small_collision_shape.disabled = false
+			current_asteroid = small_asteroid
+			current_collision = small_collision_shape
+			mass = randf_range(0.10, 0.15)
+		1:
+			medium_asteroid.visible = true
+			medium_asteroid.rotation_degrees = randi_range(0, 180)
+			medium_collision_shape.rotation_degrees = medium_asteroid.rotation_degrees 
+			medium_asteroid_area.disabled = false
+			medium_collision_shape.disabled = false
+			current_asteroid = medium_asteroid
+			current_collision = medium_collision_shape
+			mass = randf_range(0.15, 0.2)
+		2:
+			large_asteroid.visible = true
+			large_asteroid.rotation_degrees = randi_range(0, 180)
+			large_collision_shape.rotation_degrees = large_asteroid.rotation_degrees
+			large_asteroid_area.disabled = false
+			large_collision_shape.disabled = false
+			current_asteroid = large_asteroid
+			current_collision = large_collision_shape
+			mass = randf_range(0.2, 0.25)
 
-	elif asteroid_size == 1:
-		medium_asteroid.visible = true
-		medium_asteroid.rotation_degrees = randi_range(0, 180)
-		medium_collision_shape.rotation_degrees = medium_asteroid.rotation_degrees 
-		medium_asteroid_area.disabled = false
-		medium_collision_shape.disabled = false
-		current_asteroid = medium_asteroid
-		current_collision = medium_collision_shape
-		mass = randf_range(0.15, 0.2)
 
-	elif asteroid_size == 2:
-		large_asteroid.visible = true
-		large_asteroid.rotation_degrees = randi_range(0, 180)
-		large_collision_shape.rotation_degrees = large_asteroid.rotation_degrees
-		large_asteroid_area.disabled = false
-		large_collision_shape.disabled = false
-		current_asteroid = large_asteroid
-		current_collision = large_collision_shape
-		mass = randf_range(0.2, 0.25)
-	
 	#var x = randf_range(0.1, 0.25)
 	#var y = randf_range(0.1, 0.25)
 	#var size = Vector2(x, y)

@@ -12,7 +12,7 @@ func _on_area_entered(area):
 		if SystemData.player_fuel <= 75:
 			SystemData.player_fuel += 25
 		else:
-			SystemData.player_fuel = 100
+			SystemData.player_fuel = SystemData.player_max_fuel
 		get_parent().fuel_timer.start(5)
 		SystemData.fuel_collected += 1
 		self.queue_free()
