@@ -60,6 +60,7 @@ monitorable = false
 polygon = PackedVector2Array(0, -16, 2568, -16, 2576, 1456, -16, 1456, -16, -16, 0, -16, 0, 1440, 2560, 1440, 2560, 0, 0, 0)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("8_s83b5")]
+bg_random_seed = true
 
 [node name="Player" parent="." instance=ExtResource("5_dlp2k")]
 position = Vector2(1280, 720)

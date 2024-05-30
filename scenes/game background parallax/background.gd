@@ -3,8 +3,15 @@ extends ParallaxBackground
 
 @export var base_scroll : float = 0
 @export var additional_scroll : float = 0
+@export var bg_random_seed : bool = false
+
+@onready var bg_texture_5: TextureRect = $BGLayer5/BGTexture5
 
 var norm_y: float
+
+func _ready() -> void:
+	if bg_random_seed:
+		bg_texture_5.set_seed(randi())
 
 func _process(delta: float) -> void:
 	scroll_base_offset += Vector2(0, base_scroll + additional_scroll * norm_y) * delta
