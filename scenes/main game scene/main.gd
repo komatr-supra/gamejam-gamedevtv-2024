@@ -23,7 +23,7 @@ extends Node2D
 @onready var outside_countdown_label = $GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/CountdownLabel
 @onready var fuel_progress_bar = $GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/MarginContainer/CenterContainer/GridContainer/FuelProgressBar
 
-
+@onready var audio_low_fuel: AudioStreamPlayer = $AudioLowFuel
 
 var is_player_alive: bool = true
 var game_end: bool = false
@@ -141,11 +141,15 @@ func no_fuel():
 
 	if SystemData.player_fuel > 25:
 		sent_fuel_signal = false
+		no_fuel_rich_text_label.visible = false
+		audio_low_fuel.stop()
 
 	if SystemData.player_fuel <= 25 && is_player_alive:
 		sent_fuel_signal = true
 
 		if SystemData.player_fuel > 0:
+			if !audio_low_fuel.playing:
+				audio_low_fuel.play()
 			no_fuel_rich_text_label.bbcode_text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img]\nLOW FUEL![/center]"
 		else:
 			no_fuel_rich_text_label.bbcode_text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img]\nNO FUEL LEFT![/center]"
@@ -156,6 +160,7 @@ func no_fuel():
 			no_fuel_rich_text_label.visible = true
 
 	if !is_player_alive:
+		audio_low_fuel.stop()
 		no_fuel_rich_text_label.visible = false
 
 func shield_destroyed():
