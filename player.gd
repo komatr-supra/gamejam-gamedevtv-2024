@@ -14,9 +14,16 @@ extends RigidBody2D
 @export var collision_cost: int = 1
 @export var death_particles: PackedScene
 
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var shield_collision = $ShieldArea/CollisionShape2D
 @onready var shield_sprite = $ShieldArea/AnimatedSprite2D
 @onready var shield_cooldown_timer = $ShieldArea/ShieldCooldown
+@onready var audio_player: AudioStreamPlayer = $AudioExplosion
+@onready var audio_shield_on: AudioStreamPlayer = $ShieldArea/AudioShieldOn
+@onready var audio_shield_off: AudioStreamPlayer = $ShieldArea/AudioShieldOff
+@onready var audio_gas: AudioStreamPlayer = $AudioGas
+
+var alive: bool = true
 
 var thrust_enabled = false
 
@@ -64,12 +71,18 @@ func _integrate_forces(state):
 			apply_central_impulse(thrust * state.step)
 			SystemData.player_fuel -= thrust_cost
 			thrust_enabled = true
+			if audio_gas.playing and audio_gas.get_playback_position() > 2.0:
+				audio_gas.play(1.0)
 		else:
 			thrust_enabled = false
 	#get_node("jet").thrust(thrust_enabled)
 
+	if Input.is_action_just_pressed("thrust"):
+		audio_gas.play()
+
 	if Input.is_action_just_released("thrust"):
 		thrust_enabled = false
+		audio_gas.play(2.34)
 
 	player_data_signal.emit(linear_velocity, global_position)
 
@@ -97,13 +110,18 @@ func _on_shield_cooldown_timeout():
 	shield_sprite.visible = true
 
 func player_die():
-	var particles = $GPUParticles2D
-	particles.emitting = true;
-	remove_child(particles);
-	particles.position = position
-	get_parent().add_child(particles)
-	player_death_signal.emit()
-	queue_free()
+	if alive:
+		alive = false
+		var particles = $GPUParticles2D
+		particles.emitting = true
+		audio_player.playing = true
+		remove_child(particles)
+		particles.position = position
+		get_parent().add_child(particles)
+		hide()
+		player_death_signal.emit()
+		await audio_player.finished
+		queue_free()
 
 func _on_player_area_entered(area):
 	if area.is_in_group("delete_object"):

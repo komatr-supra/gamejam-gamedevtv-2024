@@ -275,6 +275,7 @@ visible = false
 stream = ExtResource("13_p2uwh")
 volume_db = -10.0
 autoplay = true
+bus = &"Music"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_viewport_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_viewport_area_exited"]
