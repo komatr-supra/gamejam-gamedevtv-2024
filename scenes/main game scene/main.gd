@@ -25,6 +25,8 @@ extends Node2D
 
 @onready var audio_low_fuel: AudioStreamPlayer = $AudioLowFuel
 
+@onready var parallax_background: ParallaxBackground = $ParallaxBackground
+
 var is_player_alive: bool = true
 var game_end: bool = false
 var sent_fuel_signal: bool = false
@@ -36,6 +38,10 @@ signal low_fuel_signal
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_PAUSABLE
+	# TODO Probably not the best way to do this
+	get_tree().paused = true
+	await parallax_background.bg_texture_5.texture.changed
+	get_tree().paused = false
 	
 	fuel_progress_bar.scale = Vector2(0.5, 0.5)
 

@@ -34,4 +34,4 @@ func _on_timer_timeout():
 func _input(event):
 	if Input.is_action_just_pressed("ui_accept"):
 		audio_typing.stop()
-		get_tree().change_scene_to_file("res://scenes/main game scene/game_scene.tscn")
+		SceneTransition.change_scene_to_file("res://scenes/main game scene/game_scene.tscn")
