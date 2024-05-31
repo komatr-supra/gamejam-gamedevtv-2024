@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 [autoload]
 
 SystemData="*res://system_data.gd"
+SceneTransition="*res://scenes/scene_transition/scene_transition.tscn"
 
 [display]
 
