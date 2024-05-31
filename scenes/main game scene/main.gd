@@ -43,8 +43,6 @@ func _ready():
 	await parallax_background.bg_texture_5.texture.changed
 	get_tree().paused = false
 	
-
-	
 	fuel_progress_bar.scale = Vector2(0.5, 0.5)
 
 	SystemData.player_fuel = SystemData.player_max_fuel
