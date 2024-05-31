@@ -126,7 +126,7 @@ visible = false
 layout_mode = 2
 theme = ExtResource("10_o8iod")
 bbcode_enabled = true
-text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img]
+text = "[center][img=100]res://sprites/Warning.png[/img]
 NO FUEL LEFT![/center]"
 
 [node name="NoFuelBlinkTimer" type="Timer" parent="GUILayer/MainGUIContainer/TopMarginContainer/GridContainer/MidMarginContainer"]
@@ -183,7 +183,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 bbcode_enabled = true
-text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img][/center]"
+text = "[center][img=100]res://sprites/Warning.png[/img][/center]"
 fit_content = true
 
 [node name="Label" type="Label" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer"]
