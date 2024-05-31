@@ -15,25 +15,25 @@ extends RigidBody2D
 @export var death_particles: PackedScene
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var player_area = $PlayerArea
+@onready var shield_area = $ShieldArea
 @onready var shield_collision = $ShieldArea/CollisionShape2D
 @onready var shield_sprite = $ShieldArea/AnimatedSprite2D
 @onready var shield_cooldown_timer = $ShieldArea/ShieldCooldown
-@onready var audio_player: AudioStreamPlayer = $AudioExplosion
+@onready var audio_gas: AudioStreamPlayer = $AudioGas
+@onready var audio_explosion: AudioStreamPlayer = $AudioExplosion
 @onready var audio_shield_on: AudioStreamPlayer = $ShieldArea/AudioShieldOn
 @onready var audio_shield_off: AudioStreamPlayer = $ShieldArea/AudioShieldOff
-@onready var audio_gas: AudioStreamPlayer = $AudioGas
-
-var alive: bool = true
 
 var thrust_enabled = false
-
-var shield_time_left: float
 
 #@onready var power_bar : TextureProgressBar = $PowerBar
 
 signal player_data_signal(velocity: Vector2, position: Vector2)
 signal player_death_signal
 signal shield_destroyed_signal
+signal thrust_started
+signal thrust_ended
 
 func _ready():
 	fuel_bar.value = SystemData.player_fuel
@@ -45,9 +45,6 @@ func _process(delta):
 		sprite.animation = "idle"
 
 	fuel_bar.value = SystemData.player_fuel
-
-	if SystemData.shield_health <= 0:
-		shield_time_left = shield_cooldown_timer.time_left
 
 func _integrate_forces(state):
 	var current_angular_velocity = angular_velocity  # Aktuální úhlová rychlost
@@ -71,18 +68,17 @@ func _integrate_forces(state):
 			apply_central_impulse(thrust * state.step)
 			SystemData.player_fuel -= thrust_cost
 			thrust_enabled = true
-			if audio_gas.playing and audio_gas.get_playback_position() > 2.0:
-				audio_gas.play(1.0)
 		else:
 			thrust_enabled = false
+			thrust_ended.emit()
 	#get_node("jet").thrust(thrust_enabled)
 
 	if Input.is_action_just_pressed("thrust"):
-		audio_gas.play()
+		thrust_started.emit()
 
 	if Input.is_action_just_released("thrust"):
 		thrust_enabled = false
-		audio_gas.play(2.34)
+		thrust_ended.emit()
 
 	player_data_signal.emit(linear_velocity, global_position)
 
@@ -110,18 +106,19 @@ func _on_shield_cooldown_timeout():
 	shield_sprite.visible = true
 
 func player_die():
-	if alive:
-		alive = false
-		var particles = $GPUParticles2D
-		particles.emitting = true
-		audio_player.playing = true
-		remove_child(particles)
-		particles.position = position
-		get_parent().add_child(particles)
-		hide()
-		player_death_signal.emit()
-		await audio_player.finished
-		queue_free()
+	var particles = $GPUParticles2D
+	particles.emitting = true
+	remove_child(particles)
+	particles.position = position
+	get_parent().add_child(particles)
+	hide()
+	player_death_signal.emit()
+	collision_shape.queue_free()
+	shield_area.queue_free()
+	player_area.queue_free()
+	audio_gas.queue_free()
+	await audio_explosion.finished
+	queue_free()
 
 func _on_player_area_entered(area):
 	if area.is_in_group("delete_object"):

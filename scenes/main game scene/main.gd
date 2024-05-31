@@ -150,9 +150,9 @@ func no_fuel():
 		if SystemData.player_fuel > 0:
 			if !audio_low_fuel.playing:
 				audio_low_fuel.play()
-			no_fuel_rich_text_label.bbcode_text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img]\nLOW FUEL![/center]"
+			no_fuel_rich_text_label.bbcode_text = "[center][img=100]res://sprites/Warning.png[/img]\nLOW FUEL![/center]"
 		else:
-			no_fuel_rich_text_label.bbcode_text = "[center][img=100]res://sprites/WarningPlaceholder.png[/img]\nNO FUEL LEFT![/center]"
+			no_fuel_rich_text_label.bbcode_text = "[center][img=100]res://sprites/Warning.png[/img]\nNO FUEL LEFT![/center]"
 
 		if no_fuel_rich_text_label.visible:
 			no_fuel_rich_text_label.visible = false
