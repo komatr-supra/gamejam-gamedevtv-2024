@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dttnoca6h8g41" path="res://scenes/pause_scene/pause_scene.tscn" id="11_dx34h"]
 [ext_resource type="Texture2D" uid="uid://2jvhtkrj5gp4" path="res://sprites/HealthSmall.png" id="12_f03hg"]
 [ext_resource type="PackedScene" uid="uid://dybnflwyw1dvs" path="res://scenes/victory/victory_screen.tscn" id="12_iggr2"]
-[ext_resource type="Texture2D" uid="uid://bj5o1k0emoxc0" path="res://sprites/HealthFullSmall.png" id="13_0gtrb"]
+[ext_resource type="Texture2D" uid="uid://bawrb5fuv5gkd" path="res://sprites/RedBarSmall.png" id="13_1fafh"]
 [ext_resource type="AudioStream" uid="uid://eyhht1ggaqt" path="res://Bonus/fight.ogg" id="13_p2uwh"]
 [ext_resource type="AudioStream" uid="uid://cctcv3ifduv6f" path="res://Sounds/Low Fuel 1.wav" id="18_036r0"]
 
@@ -226,7 +226,7 @@ size_flags_vertical = 6
 value = 100.0
 texture_under = ExtResource("11_7r5ae")
 texture_over = ExtResource("12_f03hg")
-texture_progress = ExtResource("13_0gtrb")
+texture_progress = ExtResource("13_1fafh")
 
 [node name="RightEmptyMarginContainer" type="MarginContainer" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer"]
 layout_mode = 2
