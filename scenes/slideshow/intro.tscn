@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfwuwbvcku5yf"]
+[gd_scene load_steps=5 format=3 uid="uid://bfwuwbvcku5yf"]
 
 [ext_resource type="Script" path="res://scenes/slideshow/intro.gd" id="1_vkdyc"]
 [ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_gd4to"]
 [ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="3_sdcsm"]
+[ext_resource type="AudioStream" uid="uid://bdk3b01xu8hf2" path="res://Sounds/Typing.wav" id="4_hras2"]
 
 [node name="Intro" type="Node"]
 script = ExtResource("1_vkdyc")
@@ -58,5 +59,10 @@ one_shot = true
 autostart = true
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_sdcsm")]
+
+[node name="AudioTyping" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hras2")
+volume_db = -10.0
+bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
