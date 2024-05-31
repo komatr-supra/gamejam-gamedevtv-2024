@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dg1hplh4vtyyd"]
+[gd_scene load_steps=8 format=3 uid="uid://dg1hplh4vtyyd"]
 
 [ext_resource type="Script" path="res://scenes/new start scene/menu.gd" id="1_rb5ok"]
 [ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_umyxd"]
+[ext_resource type="Texture2D" uid="uid://dph0uc6l2dwms" path="res://sprites/Start.png" id="3_sop4e"]
 [ext_resource type="PackedScene" uid="uid://bjxr0iep468t3" path="res://scenes/falling objects/new_asteroid.tscn" id="4_243y7"]
 [ext_resource type="PackedScene" uid="uid://cn26jqfqdu51d" path="res://scenes/player scene/destruction_particles.tscn" id="5_l4p10"]
 [ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="6_bys3q"]
@@ -211,7 +212,8 @@ theme_override_constants/margin_bottom = 32
 [node name="StartButton" type="Button" parent="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/BotMarginContainer"]
 layout_mode = 2
 theme = ExtResource("2_umyxd")
-text = "START"
+icon = ExtResource("3_sop4e")
+flat = true
 
 [node name="RightMarginContainer" type="MarginContainer" parent="GridContainer/BotMarginContainer/GridContainer"]
 layout_mode = 2
