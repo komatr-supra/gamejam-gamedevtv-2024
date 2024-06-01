@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dg1hplh4vtyyd"]
+[gd_scene load_steps=12 format=3 uid="uid://dg1hplh4vtyyd"]
 
 [ext_resource type="Script" path="res://scenes/new start scene/menu.gd" id="1_rb5ok"]
 [ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_umyxd"]
@@ -7,6 +7,30 @@
 [ext_resource type="PackedScene" uid="uid://cn26jqfqdu51d" path="res://scenes/player scene/destruction_particles.tscn" id="5_l4p10"]
 [ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="6_bys3q"]
 [ext_resource type="PackedScene" uid="uid://6xfubrtyfw2b" path="res://scenes/particles scene/particle_static.tscn" id="6_sosn0"]
+[ext_resource type="Texture2D" uid="uid://dxud6s6gyxkfa" path="res://sprites/SoundNo.png" id="8_qgy6x"]
+[ext_resource type="Texture2D" uid="uid://c1jubiu2oh8dv" path="res://sprites/SoundYes.png" id="9_olyrh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vef4e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_qgy6x")
+}],
+"loop": true,
+"name": &"sound_off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_olyrh")
+}],
+"loop": true,
+"name": &"sound_on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0jnm"]
+size = Vector2(80, 80)
 
 [node name="Menu" type="Node"]
 script = ExtResource("1_rb5ok")
@@ -29,7 +53,16 @@ layout_mode = 2
 [node name="Label" type="Label" parent="GridContainer/TopMarginContainer/CenterContainer"]
 layout_mode = 2
 theme = ExtResource("2_umyxd")
-text = "GAME NAME"
+theme_override_font_sizes/font_size = 76
+text = "LAST STAND"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftMarginContainer" type="MarginContainer" parent="GridContainer/TopMarginContainer"]
+layout_mode = 2
+
+[node name="RightMarginContainer" type="MarginContainer" parent="GridContainer/TopMarginContainer"]
+layout_mode = 2
 
 [node name="BotMarginContainer" type="MarginContainer" parent="GridContainer"]
 layout_mode = 2
@@ -286,4 +319,54 @@ position = Vector2(-220, 310)
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("6_bys3q")]
 
+[node name="MusicButton" type="Area2D" parent="."]
+position = Vector2(640, 480)
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MusicButton"]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_vef4e")
+animation = &"sound_on"
+autoplay = "sound_on"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MusicButton"]
+position = Vector2(-1, -4)
+shape = SubResource("RectangleShape2D_n0jnm")
+
+[node name="Label" type="Label" parent="MusicButton"]
+offset_left = -40.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 39.0
+theme = ExtResource("2_umyxd")
+text = "MUSIC"
+horizontal_alignment = 1
+
+[node name="SFXButton" type="Area2D" parent="."]
+position = Vector2(640, 608)
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SFXButton"]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_vef4e")
+animation = &"sound_on"
+autoplay = "sound_on"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SFXButton"]
+position = Vector2(-1, -4)
+shape = SubResource("RectangleShape2D_n0jnm")
+
+[node name="Label" type="Label" parent="SFXButton"]
+offset_left = -40.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 39.0
+theme = ExtResource("2_umyxd")
+text = "SFX"
+horizontal_alignment = 1
+
 [connection signal="button_up" from="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/BotMarginContainer/StartButton" to="." method="_on_start_button_up"]
+[connection signal="mouse_entered" from="MusicButton" to="." method="_on_music_button_mouse_entered"]
+[connection signal="mouse_exited" from="MusicButton" to="." method="_on_music_button_mouse_exited"]
+[connection signal="mouse_entered" from="SFXButton" to="." method="_on_sfx_button_mouse_entered"]
+[connection signal="mouse_exited" from="SFXButton" to="." method="_on_sfx_button_mouse_exited"]

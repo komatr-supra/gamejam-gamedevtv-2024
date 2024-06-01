@@ -1,8 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://dttnoca6h8g41"]
+[gd_scene load_steps=12 format=3 uid="uid://dttnoca6h8g41"]
 
 [ext_resource type="Script" path="res://scenes/pause_scene/pause_scene.gd" id="1_45e5e"]
 [ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_0kn1h"]
 [ext_resource type="PackedScene" uid="uid://bdcsnat8226eu" path="res://scenes/game background parallax/background.tscn" id="3_cgs3g"]
+[ext_resource type="Texture2D" uid="uid://dxud6s6gyxkfa" path="res://sprites/SoundNo.png" id="4_3gnhh"]
+[ext_resource type="Texture2D" uid="uid://c1jubiu2oh8dv" path="res://sprites/SoundYes.png" id="5_s6cdf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u7p3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqshw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xpare"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr7ic"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u8t0s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gdw7l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3gnhh")
+}],
+"loop": true,
+"name": &"sound_off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_s6cdf")
+}],
+"loop": true,
+"name": &"sound_on",
+"speed": 5.0
+}]
 
 [node name="PauseScene" type="Control"]
 process_mode = 2
@@ -29,11 +65,6 @@ theme_override_constants/margin_bottom = 240
 [node name="GridContainer" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="TopEmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
 [node name="TopLabel" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -43,6 +74,16 @@ theme_override_font_sizes/font_size = 26
 text = "PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TopEmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BotEmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/GridContainer"]
 layout_mode = 2
@@ -88,12 +129,69 @@ theme = ExtResource("2_0kn1h")
 text = "RETURN
 TO MENU"
 
-[node name="BotEmptyMarginContainer" type="MarginContainer" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_cgs3g")]
+
+[node name="MusicButton" type="Node2D" parent="."]
+position = Vector2(544, 336)
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="MusicButton"]
+offset_left = -41.0
+offset_top = -44.0
+offset_right = 39.0
+offset_bottom = 36.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4u7p3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aqshw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xpare")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_qr7ic")
+theme_override_styles/focus = SubResource("StyleBoxFlat_u8t0s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MusicButton"]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_gdw7l")
+animation = &"sound_on"
+autoplay = "sound_on"
+
+[node name="Label" type="Label" parent="MusicButton"]
+offset_left = -40.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 39.0
+theme = ExtResource("2_0kn1h")
+text = "MUSIC"
+horizontal_alignment = 1
+
+[node name="SFXButton" type="Node2D" parent="."]
+position = Vector2(737, 336)
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="SFXButton"]
+offset_left = -41.0
+offset_top = -44.0
+offset_right = 39.0
+offset_bottom = 36.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4u7p3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aqshw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xpare")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_qr7ic")
+theme_override_styles/focus = SubResource("StyleBoxFlat_u8t0s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SFXButton"]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_gdw7l")
+animation = &"sound_on"
+autoplay = "sound_on"
+
+[node name="Label" type="Label" parent="SFXButton"]
+offset_left = -40.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 39.0
+theme = ExtResource("2_0kn1h")
+text = "SFX"
+horizontal_alignment = 1
 
 [connection signal="button_up" from="MarginContainer/GridContainer/GridContainer/LeftMarginContainer/ResumeButton" to="." method="_on_resume_button_up"]
 [connection signal="button_up" from="MarginContainer/GridContainer/GridContainer/RightMarginContainer/MenuButton" to="." method="_on_menu_button_up"]
+[connection signal="button_up" from="MusicButton/Button" to="." method="_on_music_button_up"]
+[connection signal="button_up" from="SFXButton/Button" to="." method="_on_sfx_button_up"]
