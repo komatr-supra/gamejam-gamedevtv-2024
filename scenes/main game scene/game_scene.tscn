@@ -191,7 +191,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme = ExtResource("10_o8iod")
-text = "SPEED UP!"
+text = "RETURN TO THE PLANNED ROUTE"
 horizontal_alignment = 1
 
 [node name="CountdownLabel" type="Label" parent="GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer"]
