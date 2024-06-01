@@ -24,6 +24,8 @@ extends Node2D
 @onready var fuel_progress_bar = $GUILayer/MainGUIContainer/MidMarginContainer/GridContainer/CenterMarginContainer/OutsideGridContainer/MarginContainer/CenterContainer/GridContainer/FuelProgressBar
 
 @onready var audio_low_fuel: AudioStreamPlayer = $AudioLowFuel
+@onready var audio_fuel: AudioStreamPlayer = $AudioFuel
+@onready var audio_pickup_wrench: AudioStreamPlayer = $AudioPickupWrench
 
 @onready var parallax_background: ParallaxBackground = $ParallaxBackground
 
@@ -121,12 +123,20 @@ func _on_FallingObjectTimer_timeout():
 func _on_FuelTimer_timeout():
 	var fuel_object = fuel_collect_scene.instantiate()
 	add_child(fuel_object)
+	fuel_object.connect("fuel_collected", _on_fuel_collected)
 	fuel_object.position = Vector2(randi_range(16, (get_viewport_rect().size.x * 2) - 16), falling_object_area.global_position.y)
 
 func _on_HealthTimer_timeout():
 	var health_object = health_collect_scene.instantiate()
 	add_child(health_object)
+	health_object.connect("health_collected", _on_health_collected)
 	health_object.position = Vector2(randi_range(16, (get_viewport_rect().size.x * 2) - 16), falling_object_area.global_position.y)
+
+func _on_health_collected():
+	audio_pickup_wrench.play()
+
+func _on_fuel_collected():
+	audio_fuel.play()
 
 func on_player_hit():
 	#if SystemData.shield_health > 0:

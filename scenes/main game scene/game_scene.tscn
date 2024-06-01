@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cehk7cuewxedv"]
+[gd_scene load_steps=22 format=3 uid="uid://cehk7cuewxedv"]
 
 [ext_resource type="Script" path="res://scenes/main game scene/main.gd" id="1_3072i"]
 [ext_resource type="PackedScene" uid="uid://bjxr0iep468t3" path="res://scenes/falling objects/new_asteroid.tscn" id="2_5md3b"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://bawrb5fuv5gkd" path="res://sprites/RedBarSmall.png" id="13_1fafh"]
 [ext_resource type="AudioStream" uid="uid://eyhht1ggaqt" path="res://Bonus/fight.ogg" id="13_p2uwh"]
 [ext_resource type="AudioStream" uid="uid://cctcv3ifduv6f" path="res://Sounds/Low Fuel 1.wav" id="18_036r0"]
+[ext_resource type="AudioStream" uid="uid://bsm4tfodob0oo" path="res://Sounds/Pickup Wrench.wav" id="19_fk81j"]
+[ext_resource type="AudioStream" uid="uid://d1uft6xtaotmm" path="res://Sounds/Fuel.wav" id="20_bi8ii"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnm1o"]
 size = Vector2(2816, 16)
@@ -275,13 +277,22 @@ visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_p2uwh")
-volume_db = -10.0
+volume_db = -15.0
 autoplay = true
 bus = &"Music"
 
 [node name="AudioLowFuel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_036r0")
 volume_db = -15.0
+bus = &"SFX"
+
+[node name="AudioPickupWrench" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_fk81j")
+bus = &"SFX"
+
+[node name="AudioFuel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_bi8ii")
+volume_db = -10.0
 bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_viewport_area_entered"]

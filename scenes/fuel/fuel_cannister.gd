@@ -1,8 +1,6 @@
 extends Area2D
 
-#func _ready():
-	#if get_parent().fuel_timer.time_left <= 0:
-		#get_parent().fuel_timer.start(5)
+signal fuel_collected
 
 func _process(delta):
 	position.y += 200 * delta
@@ -14,6 +12,7 @@ func _on_area_entered(area):
 		else:
 			SystemData.player_fuel = SystemData.player_max_fuel
 		get_parent().fuel_timer.start(5)
+		fuel_collected.emit()
 		SystemData.fuel_collected += 1
 		self.queue_free()
 

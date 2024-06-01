@@ -267,8 +267,8 @@ size_flags_vertical = 8
 theme = ExtResource("2_umyxd")
 bbcode_enabled = true
 text = "[center][b]CONTROLS:[/b]
-- A/D TO CONTROL YOUR SHIP'S ROTATION
-- SPACEBAR TO ACTIVATE BOOST
+- A/D OR ARROWS TO CONTROL YOUR SHIP'S ROTATION
+- W, UP ARROW OR SPACEBAR TO ACTIVATE BOOST
 - ESC TO PAUSE
 
 [b]HOW TO PLAY:[/b]
