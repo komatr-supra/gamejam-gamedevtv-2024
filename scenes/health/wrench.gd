@@ -1,5 +1,7 @@
 extends Area2D
 
+signal health_collected
+
 func _ready():
 	if get_parent().health_timer.time_left <= 0:
 		get_parent().health_timer.start(3)
@@ -14,6 +16,7 @@ func _on_area_entered(area):
 		else:
 			SystemData.player_health = SystemData.player_max_health
 		get_parent().health_timer.start(3)
+		health_collected.emit()
 		SystemData.health_collected += 1
 		self.queue_free()
 
