@@ -293,6 +293,7 @@ bus = &"SFX"
 [node name="AudioFuel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_bi8ii")
 volume_db = -10.0
+bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_viewport_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_viewport_area_exited"]
