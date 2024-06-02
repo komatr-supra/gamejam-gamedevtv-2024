@@ -105,6 +105,10 @@ func _on_shield_cooldown_timeout():
 	shield_collision.disabled = false
 	shield_sprite.visible = true
 
+func flash():
+	print("flash")
+	$FlashComponent.flash()
+
 func player_die():
 	var particles = $GPUParticles2D
 	particles.emitting = true
