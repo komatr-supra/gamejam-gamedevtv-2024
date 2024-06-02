@@ -288,11 +288,12 @@ bus = &"SFX"
 
 [node name="AudioPickupWrench" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_fk81j")
+volume_db = -3.0
 bus = &"SFX"
 
 [node name="AudioFuel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_bi8ii")
-volume_db = -10.0
+volume_db = -15.0
 bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_viewport_area_entered"]
