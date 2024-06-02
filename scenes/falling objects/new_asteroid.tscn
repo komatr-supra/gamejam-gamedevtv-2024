@@ -143,15 +143,15 @@ disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_lb4m0")
-volume_db = -20.0
+volume_db = -12.0
 mix_target = 2
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="destroy"]
-[connection signal="area_entered" from="LargeAsteroid/Area2D" to="." method="_on_body_entered"]
 [connection signal="area_entered" from="LargeAsteroid/Area2D" to="." method="_on_area_entered"]
-[connection signal="area_entered" from="MediumAsteroid/Area2D" to="." method="_on_body_entered"]
+[connection signal="area_entered" from="LargeAsteroid/Area2D" to="." method="_on_body_entered"]
 [connection signal="area_entered" from="MediumAsteroid/Area2D" to="." method="_on_area_entered"]
-[connection signal="area_entered" from="SmallAsteroid/Area2D" to="." method="_on_body_entered"]
+[connection signal="area_entered" from="MediumAsteroid/Area2D" to="." method="_on_body_entered"]
 [connection signal="area_entered" from="SmallAsteroid/Area2D" to="." method="_on_area_entered"]
+[connection signal="area_entered" from="SmallAsteroid/Area2D" to="." method="_on_body_entered"]
