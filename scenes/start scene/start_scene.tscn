@@ -36,7 +36,6 @@ position = Vector2(-168, 263)
 
 [node name="GPUParticles2D" parent="." instance=ExtResource("5_w68y1")]
 position = Vector2(-205, 457)
-emitting = true
 
 [connection signal="ready" from="." to="Node2D" method="_ready"]
 [connection signal="ready" from="." to="RigidBody2D" method="particles_create"]

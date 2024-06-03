@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dg1hplh4vtyyd"]
+[gd_scene load_steps=14 format=3 uid="uid://dg1hplh4vtyyd"]
 
 [ext_resource type="Script" path="res://scenes/new start scene/menu.gd" id="1_rb5ok"]
 [ext_resource type="Theme" uid="uid://7fastx4ccd4k" path="res://main_theme.tres" id="2_umyxd"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dxud6s6gyxkfa" path="res://sprites/SoundNo.png" id="8_qgy6x"]
 [ext_resource type="Texture2D" uid="uid://c1jubiu2oh8dv" path="res://sprites/SoundYes.png" id="9_olyrh"]
 [ext_resource type="Texture2D" uid="uid://c2utefga2ub4w" path="res://sprites/LastStand2(1)(1).png" id="10_3nd8p"]
+[ext_resource type="AudioStream" uid="uid://k4b6oucf8kqj" path="res://Sounds/Last Stand Main Menu - Music.wav" id="11_xof8e"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vef4e"]
 animations = [{
@@ -288,7 +289,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_umyxd")
 text = "Antongiulio Giardino"
-uri = "https://soundcloud.com/antongiulio-giardino"
+uri = "https://m3t4lp0w3r.itch.io/"
 
 [node name="RightMarginContainer" type="MarginContainer" parent="GridContainer/BotMarginContainer/GridContainer"]
 visible = false
@@ -448,6 +449,12 @@ horizontal_alignment = 1
 position = Vector2(961, 179)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_3nd8p")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_xof8e")
+volume_db = -16.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="button_up" from="GridContainer/BotMarginContainer/GridContainer/LeftMarginContainer/GridContainer/BotMarginContainer/StartButton" to="." method="_on_start_button_up"]
 [connection signal="mouse_entered" from="MusicButton" to="." method="_on_music_button_mouse_entered"]
