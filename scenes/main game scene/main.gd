@@ -147,6 +147,8 @@ func on_player_hit():
 		SystemData.player_health -= SystemData.collision_cost
 		if SystemData.player_health <= 0:
 			player.player_die()
+		else:
+			player.flash()
 
 func game_win():
 	victory_screen.game_win()

@@ -143,11 +143,7 @@ disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_lb4m0")
-<<<<<<< Updated upstream
-volume_db = -12.0
-=======
 volume_db = -14.0
->>>>>>> Stashed changes
 mix_target = 2
 bus = &"SFX"
 
