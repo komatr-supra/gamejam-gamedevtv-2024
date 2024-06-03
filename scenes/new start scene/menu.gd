@@ -3,7 +3,6 @@ extends Node
 @onready var music_sprite = $MusicButton/AnimatedSprite2D
 @onready var sfx_sprite = $SFXButton/AnimatedSprite2D
 
-
 var music_mouse_in: bool = false
 var sfx_mouse_in: bool = false
 var music_bus = AudioServer.get_bus_index("Music")
