@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://sbenj0qdg1bj"]
+[gd_scene load_steps=50 format=3 uid="uid://sbenj0qdg1bj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_eiakb"]
 [ext_resource type="Texture2D" uid="uid://c7khvyhkwvpss" path="res://sprites/FuelEmpty.png" id="1_l8oj6"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://cxc7a8sr406xd" path="res://Sounds/Gas.wav" id="11_eedor"]
 [ext_resource type="Script" path="res://scenes/player scene/new/audio_explosion.gd" id="11_l8ycw"]
 [ext_resource type="Script" path="res://scenes/player scene/new/audio_gas.gd" id="13_s3bst"]
+[ext_resource type="Script" path="res://scenes/player scene/new/flash_component.gd" id="14_1owdd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nqwd3"]
 atlas = ExtResource("3_kefhh")
@@ -420,6 +421,10 @@ stream = ExtResource("11_eedor")
 volume_db = -16.0
 bus = &"SFX"
 script = ExtResource("13_s3bst")
+
+[node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("14_1owdd")
+player = NodePath("../AnimatedSprite2D")
 
 [connection signal="player_death_signal" from="." to="AudioExplosion" method="_on_player_player_death_signal"]
 [connection signal="player_death_signal" from="." to="AudioGas" method="_on_player_player_death_signal"]
