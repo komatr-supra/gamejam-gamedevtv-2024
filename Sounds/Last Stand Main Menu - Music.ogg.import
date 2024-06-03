@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ddcp6th20gvg2"
+path="res://.godot/imported/Last Stand Main Menu - Music.ogg-ab799c4e4867f391796fcc5f7b1a470f.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sounds/Last Stand Main Menu - Music.ogg"
+dest_files=["res://.godot/imported/Last Stand Main Menu - Music.ogg-ab799c4e4867f391796fcc5f7b1a470f.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

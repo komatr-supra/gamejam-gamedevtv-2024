@@ -417,11 +417,7 @@ script = ExtResource("11_l8ycw")
 
 [node name="AudioGas" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_eedor")
-<<<<<<< Updated upstream
-volume_db = -12.0
-=======
 volume_db = -16.0
->>>>>>> Stashed changes
 bus = &"SFX"
 script = ExtResource("13_s3bst")
 

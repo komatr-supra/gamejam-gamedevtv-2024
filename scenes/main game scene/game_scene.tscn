@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://2jvhtkrj5gp4" path="res://sprites/HealthSmall.png" id="12_f03hg"]
 [ext_resource type="PackedScene" uid="uid://dybnflwyw1dvs" path="res://scenes/victory/victory_screen.tscn" id="12_iggr2"]
 [ext_resource type="Texture2D" uid="uid://bawrb5fuv5gkd" path="res://sprites/RedBarSmall.png" id="13_1fafh"]
-[ext_resource type="AudioStream" uid="uid://4o364m4708ot" path="res://Sounds/Last Stand - Music.wav" id="17_8t3tw"]
+[ext_resource type="AudioStream" uid="uid://cocw55g8pds7u" path="res://Sounds/Last Stand - Music.ogg" id="17_1wwkd"]
 [ext_resource type="AudioStream" uid="uid://cctcv3ifduv6f" path="res://Sounds/Low Fuel 1.wav" id="18_036r0"]
 [ext_resource type="AudioStream" uid="uid://bsm4tfodob0oo" path="res://Sounds/Pickup Wrench.wav" id="19_fk81j"]
 [ext_resource type="AudioStream" uid="uid://d1uft6xtaotmm" path="res://Sounds/Fuel.wav" id="20_bi8ii"]
@@ -276,14 +276,14 @@ visible = false
 visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_8t3tw")
-volume_db = -12.0
+stream = ExtResource("17_1wwkd")
+volume_db = -20.0
 autoplay = true
 bus = &"Music"
 
 [node name="AudioLowFuel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_036r0")
-volume_db = -15.0
+volume_db = -25.0
 bus = &"SFX"
 
 [node name="AudioPickupWrench" type="AudioStreamPlayer" parent="."]
@@ -293,11 +293,7 @@ bus = &"SFX"
 
 [node name="AudioFuel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_bi8ii")
-<<<<<<< Updated upstream
-volume_db = -15.0
-=======
 volume_db = -16.0
->>>>>>> Stashed changes
 bus = &"SFX"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_viewport_area_entered"]

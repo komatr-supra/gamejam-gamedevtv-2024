@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dxud6s6gyxkfa" path="res://sprites/SoundNo.png" id="8_qgy6x"]
 [ext_resource type="Texture2D" uid="uid://c1jubiu2oh8dv" path="res://sprites/SoundYes.png" id="9_olyrh"]
 [ext_resource type="Texture2D" uid="uid://c2utefga2ub4w" path="res://sprites/LastStand2(1)(1).png" id="10_3nd8p"]
-[ext_resource type="AudioStream" uid="uid://k4b6oucf8kqj" path="res://Sounds/Last Stand Main Menu - Music.wav" id="11_xof8e"]
+[ext_resource type="AudioStream" uid="uid://ddcp6th20gvg2" path="res://Sounds/Last Stand Main Menu - Music.ogg" id="11_ey8pu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vef4e"]
 animations = [{
@@ -451,8 +451,8 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_3nd8p")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_xof8e")
-volume_db = -16.0
+stream = ExtResource("11_ey8pu")
+volume_db = -20.0
 autoplay = true
 bus = &"Music"
 
